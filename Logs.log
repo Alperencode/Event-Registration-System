@@ -3,3 +3,4 @@
 - Created db named "event_registration_system"
 - Created 2 tables, respectively: "users", "events"
 - Table contents can be changed later
+- Add basic login-register page theme to test database actions
