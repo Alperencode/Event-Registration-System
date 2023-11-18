@@ -1,0 +1,5 @@
+11/18/2023:
+- Setup MySQL database completed [used Xampp]
+- Created db named "event_registration_system"
+- Created 2 tables, respectively: "users", "events"
+- Table contents can be changed later
