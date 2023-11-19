@@ -38,11 +38,12 @@ The Event Registration System is a web application being developed to provide a 
 These are the initial steps to get the project up and running on your local development environment:
 
 1. **Prerequisites:**
-   - Install Java Development Kit (JDK) and Apache Tomcat on your system.
+   
+- Install Java Development Kit (JDK) and Apache Tomcat on your system.
 
 2. **Clone the Repository:**
 
-`git clone https://github.com/Alperencode/Event-Registration-System.git`
+- `git clone https://github.com/Alperencode/Event-Registration-System.git`
 
 3. **Build and Run:**
 - Build the project and deploy it to your Tomcat server.
