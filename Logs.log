@@ -4,3 +4,9 @@
 - Created 2 tables, respectively: "users", "events"
 - Table contents can be changed later
 - Add basic login-register page theme to test database actions
+
+11/25/2023:
+- Created: UserDAO, LoginServlet, DatabaseConnection classes
+- WARNING: UserDAO might have vulnerabilty for SQL Injection [Marked in file]
+- Project has debug-prints in DatabaseConnection and LoginServlet
+- Currently it fails to connect to database even after add `mysql-connector.jar`.
