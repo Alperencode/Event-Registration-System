@@ -1,4 +1,4 @@
-package ers;
+package event_registration_system;
 
 // UserDAO.java
 import java.sql.Connection;
@@ -15,8 +15,6 @@ public class UserDAO {
     // Validation method for user login
     public static boolean validateUser(String username, String password) {
         try (Connection connection = DatabaseConnection.getConnection();
-                
-            // WARNING: Check if it creates vulnerability for SQL Injection
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);

@@ -1,4 +1,4 @@
-package ers;
+package event_registration_system;
 
 // LoginServlet.java
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             // If valid, create a session and redirect to a welcome page
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            response.sendRedirect("welcome.jsp");
+            response.sendRedirect("index.jsp");
         } else {
             // If invalid, redirect back to the login page with an error message
             response.sendRedirect("Login/login.jsp?error=true");

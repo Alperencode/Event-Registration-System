@@ -8,5 +8,10 @@
 11/25/2023:
 - Created: UserDAO, LoginServlet, DatabaseConnection classes
 - WARNING: UserDAO might have vulnerabilty for SQL Injection [Marked in file]
+    - Removed the mark since PreparedStatements cannot exploited by SQL Injection [12/01/2023]
 - Project has debug-prints in DatabaseConnection and LoginServlet
 - Currently it fails to connect to database even after add `mysql-connector.jar`.
+
+12/01/2023:
+- Solved mysql-connector error by removing password argument
+- Removed mysql-connector module [lib directory] and added using `pom.xml`
