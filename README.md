@@ -12,6 +12,7 @@ The Event Registration System is a web application being developed to provide a 
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Getting Started](#getting-started)
+  - [Sample Images](#sample-images)
   - [Contributing](#contributing)
   - [Issues and Bugs](#issues-and-bugs)
   - [License](#license)
@@ -50,6 +51,16 @@ These are the initial steps to get the project up and running on your local deve
 
 4. **Access the Application:**
 - Open a web browser and access the application at `http://localhost:8080/Event-Registration-System`.
+
+
+## Sample Images
+
+<h3> </h3>
+<img src="images/RegisterPage1.PNG" width=400>
+
+<img src="images/RegisterPage2.PNG" width=400>
+
+<img src="images/RegisterPage3.PNG" width=400>
 
 ## Contributing
 
