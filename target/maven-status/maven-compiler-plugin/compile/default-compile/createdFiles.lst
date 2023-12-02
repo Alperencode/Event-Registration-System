@@ -1,5 +1,0 @@
-event_registration_system\UserDAO.class
-com\mycompany\event\registration\system\JakartaRestConfiguration.class
-event_registration_system\DatabaseConnection.class
-event_registration_system\LoginServlet.class
-com\mycompany\event\registration\system\resources\JakartaEE8Resource.class
