@@ -25,4 +25,4 @@
 
 12/02/2023:
 - Add username and email check for new registration [Prevents double registration]
-
+- Add uniqueId column to users table and use "SHA-256" hash for each creation

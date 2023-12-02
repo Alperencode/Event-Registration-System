@@ -65,11 +65,14 @@ public class UserDAO {
         } else if (checkEmailExists(email)) {
             return -2;
         }
+        
+        String uniqueId = UniqueIdGenerator.generateUniqueId(username, email);
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)")) {
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, password);
+                "INSERT INTO Users (uniqueId, username, email, password) VALUES (?, ?, ?, ?)")) {
+            preparedStatement.setString(1, uniqueId);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, password);
 
             // Use executeUpdate for INSERT statements
             int rowsAffected = preparedStatement.executeUpdate();
