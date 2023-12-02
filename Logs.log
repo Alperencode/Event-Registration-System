@@ -13,5 +13,16 @@
 - Currently it fails to connect to database even after add `mysql-connector.jar`.
 
 12/01/2023:
+- Fix login bugs
 - Solved mysql-connector error by removing password argument
 - Removed mysql-connector module [lib directory] and added using `pom.xml`
+- Change main package name: ers -> event_registration_system 
+
+12/01/2023:
+- Add RegisterServlet and registration functionality
+- Update UserDAO [Add `registerUser()`]
+- Currently register doesn't checks for already created users
+
+12/02/2023:
+- Add username and email check for new registration [Prevents double registration]
+

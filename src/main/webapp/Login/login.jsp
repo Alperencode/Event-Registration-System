@@ -28,11 +28,11 @@
                             <form method="POST" action="/Event-Registration-System/LoginServlet" class="register-form">
                                 <div class="form-group">
                                     <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="username" placeholder="Your Name"/>
+                                    <input type="text" name="username" placeholder="Your Name" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                    <input type="password" name="password" placeholder="Password"/>
+                                    <input type="password" name="password" placeholder="Password" required/>
                                 </div>
                                 <%
                                 // If login fails
