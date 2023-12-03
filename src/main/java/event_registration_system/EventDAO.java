@@ -58,7 +58,7 @@ public class EventDAO {
             return -1;
         }
 
-        String eventID = UniqueIdGenerator.generateUniqueId(eventName);
+        String eventID = Hash.generateUniqueId(eventName);
         String eventDate = convertDate(eventDateTime);
         String eventTime = convertTime(eventDateTime);
 

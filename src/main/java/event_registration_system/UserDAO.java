@@ -13,9 +13,10 @@ public class UserDAO {
 
     // Validation method for user login
     public static String validateUser(String username, String password) {
+        String hashedPassword = Hash.hashPassword(password);
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, hashedPassword);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -92,13 +93,15 @@ public class UserDAO {
             return -2;
         }
 
-        String userID = UniqueIdGenerator.generateUniqueId(username, email);
+        String userID = Hash.generateUniqueId(username, email);
+        String hashedPassword = Hash.hashPassword(password);
+        
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO Users (UserID, username, email, password) VALUES (?, ?, ?, ?)")) {
             preparedStatement.setString(1, userID);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, email);
-            preparedStatement.setString(4, password);
+            preparedStatement.setString(4, hashedPassword);
 
             // Use executeUpdate for INSERT statements
             int rowsAffected = preparedStatement.executeUpdate();
