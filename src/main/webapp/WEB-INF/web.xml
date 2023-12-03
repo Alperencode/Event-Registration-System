@@ -17,4 +17,13 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <servlet-class>event_registration_system.CreateEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <url-pattern>/CreateEventServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
