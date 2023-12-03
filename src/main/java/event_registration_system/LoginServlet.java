@@ -18,10 +18,11 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         // Validate the user against the database using UserDAO
-        if (UserDAO.validateUser(username, password)) {
+        String userID = UserDAO.validateUser(username, password);
+        if (userID != null) {
             // If valid, create a session and redirect to a index page with session
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("user", UserDAO.getUser(userID));
             response.sendRedirect("index.jsp");
         } else {
             // If invalid, redirect back to the login page with an error message

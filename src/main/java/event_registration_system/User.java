@@ -1,8 +1,33 @@
 package event_registration_system;
 
 public class User {
+    private String userID, username, email, password, creationDate;
 
-    String username, email, password;
+    public User(String userID, String username, String email, String password, String creationDate) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.creationDate = creationDate;
+    }
+    
+    public User(){}
+    
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public String getUsername() {
         return username;

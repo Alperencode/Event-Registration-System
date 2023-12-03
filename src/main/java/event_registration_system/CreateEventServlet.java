@@ -26,7 +26,7 @@ public class CreateEventServlet extends HttpServlet {
         String longDescription = request.getParameter("description");
 
         HttpSession session = request.getSession();
-        String organizerID = (String) session.getAttribute("userID");
+        String organizerID = ((User)session.getAttribute("user")).getUserID();
 
         // Register the event using EventDAO
         int result = 0;

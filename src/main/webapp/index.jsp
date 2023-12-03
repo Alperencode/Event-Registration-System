@@ -1,3 +1,4 @@
+<%@page import="event_registration_system.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,9 +8,12 @@
     </head>
     <body>
         <%
-            if(session.getAttribute("username") != null){
-                out.println("<h1>Welcome " + session.getAttribute("username") + "!</h1>");
-                out.println("<a href=Event/EventCreation.jsp>Create Event</a>");
+            User user = (User) session.getAttribute("user");
+            if(user != null){
+            %>
+                <h1>Welcome <% out.println(user.getUsername()); %></h1>
+                <a href=Event/EventCreation.jsp>Create Event</a>
+            <%
             }
         %>
         <h1>Event Registration System</h1>
