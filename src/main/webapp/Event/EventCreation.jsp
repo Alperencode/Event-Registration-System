@@ -180,7 +180,19 @@
                     <label for="deleteButton"></label>
                     <button id="deleteButton">Delete</button><br><br>
                 </form>
-
+                <%
+                    if (request.getParameter("eventNameExist") != null && request.getParameter("eventNameExist").equals("true")) {
+                %>
+                <p style="color:red;"> You already created event with same name! </p>
+                <%
+                    }else if (request.getParameter("connError") != null && request.getParameter("connError").equals("true")) {
+                %>
+                <p style="color:red;"> Something went wrong, please try again. </p>
+                <%
+                    }else if (request.getParameter("successfull") != null && request.getParameter("successfull").equals("true")) {
+                %>
+                    <p style="color:green;"> Event successfully created! </p>
+                <%}%>
                 <div id="participantsList">
                     <h3>Participants List</h3>
                     <div id="participantContainer">

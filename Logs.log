@@ -33,4 +33,5 @@
 - Create Event directory for register new event forms [temporary form]
 - Update UniqueIdGenerator [Override function for one argument] 
 - Create User-Event classes
+- Add EventCreation error messages
 - Finish developing EventCreation [works with userID]

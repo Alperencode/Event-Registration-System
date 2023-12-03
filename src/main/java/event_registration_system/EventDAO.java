@@ -12,9 +12,10 @@ import java.text.SimpleDateFormat;
 public class EventDAO {
     // Methods for CRUD operations on the Events table
 
-    public static boolean checkEventNameExists(String eventName) {
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events WHERE eventName LIKE ?")) {
+    public static boolean checkEventNameExists(String eventName, String organizerID) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events WHERE eventName LIKE ? and organizerID = ?")) {
             preparedStatement.setString(1, eventName);
+            preparedStatement.setString(2, organizerID);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 return resultSet.next();
             }
@@ -53,7 +54,7 @@ public class EventDAO {
         -1 : if eventName already exists
         0  : sql query or database connection failed
          */
-        if (checkEventNameExists(eventName)) {
+        if (checkEventNameExists(eventName, organizerID)) {
             return -1;
         }
 

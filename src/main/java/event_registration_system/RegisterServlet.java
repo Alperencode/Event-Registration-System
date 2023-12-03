@@ -32,7 +32,8 @@ public class RegisterServlet extends HttpServlet {
         } else {
             // >0 : Registration successfull
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            String userID = UserDAO.validateUser(username, password);
+            session.setAttribute("user", UserDAO.getUser(userID));
             response.sendRedirect("index.jsp");
         }
     }
