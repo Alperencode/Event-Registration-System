@@ -9,6 +9,7 @@
         <%
             if(session.getAttribute("username") != null){
                 out.println("<h1>Welcome " + session.getAttribute("username") + "!</h1>");
+                out.println("<a href=Event/EventCreation.jsp>Create Event</a>");
             }
         %>
         <h1>Event Registration System</h1>

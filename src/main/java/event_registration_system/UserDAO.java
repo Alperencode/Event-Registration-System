@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- */
 public class UserDAO {
     // Methods for CRUD operations on the Users table
 
@@ -66,10 +63,10 @@ public class UserDAO {
             return -2;
         }
         
-        String uniqueId = UniqueIdGenerator.generateUniqueId(username, email);
+        String userID = UniqueIdGenerator.generateUniqueId(username, email);
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Users (uniqueId, username, email, password) VALUES (?, ?, ?, ?)")) {
-            preparedStatement.setString(1, uniqueId);
+                "INSERT INTO Users (UserID, username, email, password) VALUES (?, ?, ?, ?)")) {
+            preparedStatement.setString(1, userID);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, password);

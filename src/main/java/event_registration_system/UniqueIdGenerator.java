@@ -25,4 +25,25 @@ public class UniqueIdGenerator {
             return null;
         }
     }
+    
+    public static String generateUniqueId(String username) {
+        // Combine username, email, and current timestamp
+        String dataToHash = username + System.currentTimeMillis();
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(dataToHash.getBytes());
+
+            // Convert the first 8 bytes of the hash to a hexadecimal representation
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 8; i++) {
+                sb.append(String.format("%02x", hashedBytes[i]));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
