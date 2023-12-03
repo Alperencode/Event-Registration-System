@@ -26,3 +26,11 @@
 12/02/2023:
 - Add username and email check for new registration [Prevents double registration]
 - Add uniqueId column to users table and use "SHA-256" hash for each creation
+
+12/03/2023:
+- Start developing EventCreation
+- Create CreateEvenServlet and EventDAO
+- Create Event directory for register new event forms [temporary form]
+- Update UniqueIdGenerator [Override function for one argument] 
+- Create User-Event classes to make project compatible with JavaBeans
+- Currently EventCreation works but there are issues with getting userID [will be fixed with JavaBeans]
