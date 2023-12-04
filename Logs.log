@@ -35,3 +35,8 @@
 - Create User-Event classes
 - Add EventCreation error messages
 - Finish developing EventCreation [works with userID]
+
+12/04/2023:
+- Start working on page designs.
+- Add Header directory and header design [Can be updated later]
+- Add MyEvents and MyEvents css-js files
