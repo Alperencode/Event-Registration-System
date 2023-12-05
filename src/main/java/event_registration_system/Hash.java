@@ -5,9 +5,9 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hash {
 
-    public static String generateUniqueId(String username, String email) {
-        // Combine username, email, and current timestamp
-        String dataToHash = username + email + System.currentTimeMillis();
+    public static String generateUniqueId(String arg1, String arg2) {
+        // Combine arg1, arg2, and current timestamp
+        String dataToHash = arg1 + arg2 + System.currentTimeMillis();
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -26,9 +26,9 @@ public class Hash {
         }
     }
     
-    public static String generateUniqueId(String username) {
-        // Combine username, email, and current timestamp
-        String dataToHash = username + System.currentTimeMillis();
+    public static String generateUniqueId(String arg1) {
+        // Combine arg1 and current timestamp
+        String dataToHash = arg1 + System.currentTimeMillis();
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

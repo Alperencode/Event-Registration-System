@@ -2,7 +2,6 @@ package event_registration_system;
 
 // EventDAO.java
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,7 +47,7 @@ public class EventDAO {
             String organizerID
     ) throws ParseException {
         /*
-            Registration function for database
+            Event Registration function for database
         returns:
         >0 : Successfull registration
         -1 : if eventName already exists
@@ -61,9 +60,6 @@ public class EventDAO {
         String eventID = Hash.generateUniqueId(eventName);
         String eventDate = convertDate(eventDateTime);
         String eventTime = convertTime(eventDateTime);
-
-        System.out.println("EventDate: " + eventDate);
-        System.out.println("EventTime: " + eventTime);
 
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO events (eventID, eventName, eventDate, eventTime, shortDescription, longDescription, image, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {

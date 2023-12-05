@@ -141,15 +141,7 @@
             </style>
         </head>
         <body>
-            <header>
-                <div id="logo">ESR</div>
-                <div id="Events">Events</div>
-                <div id="search">
-                    <input type="text" name="search" id="searchBox" placeholder="Search">
-                </div>
-                <div id="username">Username</div>
-                <div id="myEvents">My Events</div>
-            </header>
+            <%@include  file="../Header/header.jsp" %>
             <main>
                 <form action="/Event-Registration-System/CreateEventServlet" method="POST">
                     <div id="uploadArea">

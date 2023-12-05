@@ -12,7 +12,6 @@
     <body>
 
         <div class="main">
-
             <!-- Sing in  Form -->
             <section class="sign-in">
                 <div class="container">
@@ -21,8 +20,6 @@
                             <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
                             <a href="register.jsp" class="signup-image-link">Create an account</a>
                         </div>
-
-
                         <div class="signin-form">
                             <h2 class="form-title">Sign in to ERS</h2>
                             <form method="POST" action="/Event-Registration-System/LoginServlet" class="register-form">
@@ -35,8 +32,8 @@
                                     <input type="password" name="password" placeholder="Password" required/>
                                 </div>
                                 <%
-                                // If login fails
-                                if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
+                                    // If login fails
+                                    if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
                                 <div class="form-group">
                                     <p style="color: red;">Invalid username or password, Please try again.</p>
                                 </div>
@@ -48,11 +45,10 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-    </section>
-</div>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="js/main.js"></script>
-</body>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>
