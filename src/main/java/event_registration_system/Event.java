@@ -3,8 +3,8 @@ package event_registration_system;
 public class Event {
 
     String eventName, eventDateTime, maxParcitipant,
-           shortDescription ,longDescription, image,
-           organizerID;
+            shortDescription, longDescription, image,
+            organizerID;
 
     public String getEventName() {
         return eventName;

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class EventDAO {
     // Methods for CRUD operations on the Events table
@@ -22,23 +21,6 @@ public class EventDAO {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static String convertDate(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        java.sql.Date sqlDate = new java.sql.Date(formatter.parse(date).getTime());
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        String eventDate = dateFormatter.format(sqlDate);
-        return eventDate;
-    }
-
-    public static String convertTime(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        java.sql.Date sqlDate = new java.sql.Date(formatter.parse(date).getTime());
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-        String eventTime = timeFormatter.format(sqlDate);
-        return eventTime;
     }
 
     public static int registerEvent(
@@ -58,8 +40,8 @@ public class EventDAO {
         }
 
         String eventID = Hash.generateUniqueId(eventName);
-        String eventDate = convertDate(eventDateTime);
-        String eventTime = convertTime(eventDateTime);
+        String eventDate = Converters.convertDate(eventDateTime);
+        String eventTime = Converters.convertTime(eventDateTime);
 
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO events (eventID, eventName, eventDate, eventTime, shortDescription, longDescription, image, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
@@ -75,10 +57,39 @@ public class EventDAO {
             // Use executeUpdate for INSERT statements
             int rowsAffected = preparedStatement.executeUpdate();
 
+            // If there is no error, registerUserEvents 
+            registerUserEvents(organizerID, eventID, "Hosting");
             return rowsAffected; // If a new user is inserted, return true
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public static int registerUserEvents(String userID, String eventID, String eventType) throws ParseException {
+        /*
+            Registration function for database
+        returns:
+        >0 : Successfull registration
+        0  : sql query or database connection failed
+         */
+
+        String userEventID = Hash.generateUniqueId(userID, eventID);
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO user_events (userEventID, userID, eventID, eventType) VALUES (?, ?, ?, ?)")) {
+            preparedStatement.setString(1, userEventID);
+            preparedStatement.setString(2, userID);
+            preparedStatement.setString(3, eventID);
+            preparedStatement.setString(4, eventType);
+
+            // Use executeUpdate for INSERT statements
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        
     }
 }
