@@ -1,114 +1,99 @@
 package event_registration_system;
 
-// UserDAO.java
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserDAO {
     // Methods for CRUD operations on the Users table
 
     // Validation method for user login
     public static String validateUser(String username, String password) {
+        // Hash the password before compare it
         String hashedPassword = Hash.hashPassword(password);
+
+        // Prepare query to search database for username and email        
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, hashedPassword);
 
+            // Execute query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
                 if (resultSet.next()) {
-                    return resultSet.getString("userID"); // Return the userID if a record is found
+                    // If user found, return userID
+                    return resultSet.getString("userID");
                 } else {
-                    return null; // Return null to indicate no user found
+                    // Else return null
+                    return null;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static User getUser(String userID) {
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE userID = ?")) {
-            preparedStatement.setString(1, userID);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    User user = new User();
-                    user.setUserID(resultSet.getString("userID"));
-                    user.setUsername(resultSet.getString("username"));
-                    user.setEmail(resultSet.getString("email"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setCreationDate(resultSet.getString("creationDate"));
-                    return user;
-                } else {
-                    return null; // Return null to indicate no user found
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Also return null if any exception occurs
             return null;
         }
     }
 
     public static boolean checkUsernameExists(String username) {
+        //  Prepare query to search database for same username
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username LIKE ?")) {
             preparedStatement.setString(1, username);
+
+            // Execute query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // If a record is found, the user is valid
+                // If found any, return to indicate true
+                return resultSet.next();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            // If no username found, return false
             return false;
         }
     }
 
     public static boolean checkEmailExists(String email) {
+        //  Prepare query to search database for same email
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email LIKE ?")) {
             preparedStatement.setString(1, email);
+
+            // Execute query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // If a record is found, the user is valid
+                // If found any, return to indicate true
+                return resultSet.next();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            // If no email found, return false
             return false;
         }
     }
 
-    public static int registerUser(String username, String email, String password) {
-        /*
-            Registration function for database
-        returns:
-        >0 : Successfull registration
-        -1 : if username already exists
-        -2 : if email already exists
-        0  : sql query or database connection failed
-         */
-        if (checkUsernameExists(username)) {
+    public static int registerUser(User user) {
+        if (checkUsernameExists(user.getUsername())) {
+            // -1: Username already exists
             return -1;
-        } else if (checkEmailExists(email)) {
+        } else if (checkEmailExists(user.getEmail())) {
+            // -2 : if email already exists
             return -2;
         }
 
-        String userID = Hash.generateUniqueId(username, email);
-        String hashedPassword = Hash.hashPassword(password);
-        
+        //  Prepare query to create new user
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO Users (UserID, username, email, password) VALUES (?, ?, ?, ?)")) {
-            preparedStatement.setString(1, userID);
-            preparedStatement.setString(2, username);
-            preparedStatement.setString(3, email);
-            preparedStatement.setString(4, hashedPassword);
+            preparedStatement.setString(1, user.getUserID());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getPassword());
 
-            // Use executeUpdate for INSERT statements
+            // Execute query
             int rowsAffected = preparedStatement.executeUpdate();
 
-            return rowsAffected; // If a new user is inserted, return true
+            // Return rowsAffected to indicate ">0"
+            // >0 : Successfull registration
+            return rowsAffected;
         } catch (SQLException e) {
             e.printStackTrace();
+            // 0  : SQL query or database connection failed
             return 0;
         }
     }

@@ -1,10 +1,7 @@
 package event_registration_system;
 
-// CreateEventServlet.java
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,33 +15,53 @@ public class CreateEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Get Parameters from form
         String image = request.getParameter("image");
         String eventName = request.getParameter("eventName");
         String eventDateTime = request.getParameter("eventDateTime");
-        String maxParcitipant = request.getParameter("maxParticipant");
+        String maxParcitipantString = request.getParameter("maxParticipant");
+        String location = request.getParameter("location");
         String shortDescription = request.getParameter("shortDescription");
-        String longDescription = request.getParameter("description");
+        String longDescription = request.getParameter("longDescription");
 
+        // Get session to gather userID
         HttpSession session = request.getSession();
-        String organizerID = ((User)session.getAttribute("user")).getUserID();
 
-        // Register the event using EventDAO
-        int result = 0;
+        // Initialize empty event object
+        Event event = new Event();
+        
+        // Setup event values
+        String organizerID = ((User) session.getAttribute("user")).getUserID();
+        String eventID = Hash.generateUniqueId(eventName);
         try {
-            result = EventDAO.registerEvent(
-                    eventName, eventDateTime, maxParcitipant,
-                    shortDescription, longDescription, image,
-                    organizerID
+            String eventDate = Converters.convertDate(eventDateTime);
+            String eventTime = Converters.convertTime(eventDateTime);
+            int maxParcitipant = Integer.parseInt(maxParcitipantString);
+            
+            // Assign event object values
+            event = new Event(
+                eventID, eventName, eventDate, eventTime, location,
+                maxParcitipant, shortDescription, longDescription, image, organizerID
             );
-        } catch (ParseException ex) {
-            // Auto-Created try-catch block
-            Logger.getLogger(CreateEventServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException | ParseException e) {
+            response.sendRedirect("Event/EventCreation.jsp?connError=true");
         }
 
-        if (result == -1) {
+        // Initialize return value
+        int returnValue = 0;
+        
+        // Try to register event
+        try {
+            returnValue = EventDAO.registerEvent(event);
+        } catch (ParseException ex) {
+            response.sendRedirect("Event/EventCreation.jsp?connError=true");
+        }
+        
+        // Redirect according to returnValue
+        if (returnValue == -1) {
             // -1: EventName already exists
             response.sendRedirect("Event/EventCreation.jsp?eventNameExist=true");
-        } else if (result == 0) {
+        } else if (returnValue == 0) {
             // 0: Sql query or database connection failed
             response.sendRedirect("Event/EventCreation.jsp?connError=true");
         } else {

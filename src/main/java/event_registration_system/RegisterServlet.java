@@ -14,26 +14,41 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // Get Parameters from form
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Register the user using UserDAO
-        int result = UserDAO.registerUser(username, email, password);
-        if (result == -1) {
+        // Setup user values
+        String userID = Hash.generateUniqueId(username, email);
+        String hashedPassword = Hash.hashPassword(password);
+
+        // Assign user object values
+        User user = new User(
+                userID, username, email, hashedPassword
+        );
+
+        // Initialize returnValue
+        int returnValue = 0;
+        
+        // Try to register user
+        returnValue = UserDAO.registerUser(user);
+        
+        // Redirect according to returnValue
+        if (returnValue == -1) {
             // -1: Username already exists
             response.sendRedirect("Login/register.jsp?usernameExist=true");
-        } else if (result == -2) {
+        } else if (returnValue == -2) {
             // -2: Email already exists
             response.sendRedirect("Login/register.jsp?emailExist=true");
-        } else if (result == 0) {
+        } else if (returnValue == 0) {
             // 0: Sql query or database connection failed
             response.sendRedirect("Login/register.jsp?connError=true");
         } else {
             // >0 : Registration successfull
             HttpSession session = request.getSession();
-            String userID = UserDAO.validateUser(username, password);
-            session.setAttribute("user", UserDAO.getUser(userID));
+            session.setAttribute("user", user.getUserID());
             response.sendRedirect("index.jsp");
         }
     }
