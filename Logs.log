@@ -34,9 +34,25 @@
 - Update UniqueIdGenerator [Override function for one argument] 
 - Create User-Event classes
 - Add EventCreation error messages
-- Finish developing EventCreation [works with userID]
+- Finish developing EventCreation [Works with userID]
 
 12/04/2023:
 - Start working on page designs.
 - Add Header directory and header design [Can be updated later]
 - Add MyEvents and MyEvents css-js files
+
+12/05/2023:
+- Fix minor bugs and Clean the code
+- Start developing association table
+
+12/06/2023:
+- Finish developing association table
+- Add association table related functions [Can be updated]
+
+12/07/2023:
+- Refactor entire OOP implementation
+- Redesign events table to add missing columns [Events: location, maxParticipant]
+- Implement encapsulation to all classes [User, Event]
+- Refactor all Servlets and DAOs to use class objects properly
+- Add user-friendly comment lines for each operation
+- Clean the code

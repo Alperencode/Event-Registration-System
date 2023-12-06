@@ -4,7 +4,8 @@
 
 The Event Registration System is a web application being developed to provide a platform for event organizers to create and manage events, while allowing users to browse and register for these events. This README will provide an overview of the project, setup instructions, and initial considerations for development.
 
-> **Note:** This project is still in the development phase, and this README is intended as a starting point for the team.
+> [!NOTE] 
+> This project is still in the development phase, and this README is intended as a starting point for the team.
 
 ## Table of Contents
 - [Event Registration System (In Development)](#event-registration-system-in-development)
