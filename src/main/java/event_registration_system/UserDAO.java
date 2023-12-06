@@ -8,7 +8,31 @@ import java.sql.SQLException;
 public class UserDAO {
     // Methods for CRUD operations on the Users table
 
-    // Validation method for user login
+    public static User getUser(String userID) {
+        // Prepare query to search database for user with given userID
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE userID = ?")) {
+            preparedStatement.setString(1, userID);
+
+            // Execute query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // If user found, return User object
+                    return new User(
+                            resultSet.getString("userID"),
+                            resultSet.getString("username"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password")
+                    );
+                } else {
+                    return null; // Return null to indicate no user found
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String validateUser(String username, String password) {
         // Hash the password before compare it
         String hashedPassword = Hash.hashPassword(password);

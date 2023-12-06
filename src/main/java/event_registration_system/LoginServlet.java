@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         if (userID != null) {
             // If valid, create a session and redirect to a index page with session
             HttpSession session = request.getSession();
-            session.setAttribute("user", userID);
+            session.setAttribute("user", UserDAO.getUser(userID));
             response.sendRedirect("index.jsp");
         } else {
             // If invalid, redirect back to the login page with an error message
