@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <%@include file="../Header/header.jsp" %>
 
         <div class="main">
             <!-- Sing in  Form -->

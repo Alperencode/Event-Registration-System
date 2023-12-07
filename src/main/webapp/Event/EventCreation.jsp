@@ -141,8 +141,9 @@
             </style>
         </head>
         <body>
-            <%@include  file="../Header/header.jsp" %>
+            <%@include file="../Header/header.jsp" %>
             <main>
+                <br><br><br>
                 <form action="/Event-Registration-System/CreateEventServlet" method="POST">
                     <div id="uploadArea">
                         <input type="file" name="image" accept="image/*"><br><br>
@@ -160,9 +161,12 @@
                         <label for="shortDescription">Short Description:</label>
                         <input type="text" name="shortDescription" id="eventName"> <br><br>
 
+                        <label for="location">Location:</label>
+                        <input type="text" name="location" id="eventName"> <br><br>
+
                         <div id="explanation">
                             <label for="description">Description :</label>
-                            <textarea id="explanationText" name="description" placeholder="(max 250 character)" maxlength="250"></textarea><br><br>
+                            <textarea id="explanationText" name="longDescription" placeholder="(max 250 character)" maxlength="250"></textarea><br><br>
                         </div>
                     </div>
 
