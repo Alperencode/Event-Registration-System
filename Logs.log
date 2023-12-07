@@ -3,9 +3,9 @@ Abbreviations:
 - CRUD: Create Read Update Delete
 
 11/18/2023:
-- Setup MySQL database completed [used Xampp]
-- Created db named "event_registration_system"
-- Created 2 tables, respectively: "users", "events"
+- Setup MySQL database [used Xampp]
+- Create db named "event_registration_system"
+- Create 2 tables, respectively: "users", "events"
 - Table contents can be changed later
 - Add basic login-register page theme to test database actions
 
@@ -64,3 +64,16 @@ Abbreviations:
 -- Day
 - Add and Refactor DAOs for CRUD operations
 - Add UserEventsDAO to seperate related table operations from EventDAO
+
+12/08/2023:
+- Start putting web pages together
+-- Add following:
+- Account directory -> updateAccount, logOut jsp pages
+- Pages directory -> pages functionality to import page numbers html
+- Images directory -> Images which will serve as a stroge for all images
+-- Update following:
+- Folder structure -> create css and js directories for each directory
+- File imports -> change imports paths to import from Context Path
+- Header -> finish the header hyperlinks and data [Design can be updated]
+-- Remove following:
+- EventCreation -> updated to new design and named EventCreation

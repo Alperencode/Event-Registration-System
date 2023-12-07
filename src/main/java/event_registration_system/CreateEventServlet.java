@@ -10,13 +10,12 @@ import javax.servlet.http.HttpSession;
 
 public class CreateEventServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Get Parameters from form
         String image = request.getParameter("image");
+        System.out.println("image: "+image);
         String eventName = request.getParameter("eventName");
         String eventDateTime = request.getParameter("eventDateTime");
         String maxParcitipantString = request.getParameter("maxParticipant");
@@ -44,7 +43,7 @@ public class CreateEventServlet extends HttpServlet {
                 maxParcitipant, shortDescription, longDescription, image, organizerID
             );
         } catch (NumberFormatException | ParseException e) {
-            response.sendRedirect("Event/EventCreation.jsp?connError=true");
+            response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         }
 
         // Initialize return value
@@ -54,19 +53,19 @@ public class CreateEventServlet extends HttpServlet {
         try {
             returnValue = EventDAO.createEvent(event);
         } catch (ParseException ex) {
-            response.sendRedirect("Event/EventCreation.jsp?connError=true");
+            response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         }
         
         // Redirect according to returnValue
         if (returnValue == -1) {
             // -1: EventName already exists
-            response.sendRedirect("Event/EventCreation.jsp?eventNameExist=true");
+            response.sendRedirect("Event/CreateEvent.jsp?eventNameExist=true");
         } else if (returnValue == 0) {
             // 0: Sql query or database connection failed
-            response.sendRedirect("Event/EventCreation.jsp?connError=true");
+            response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         } else {
             // >0 : Registration successfull
-            response.sendRedirect("Event/EventCreation.jsp?successfull=true");
+            response.sendRedirect("Event/CreateEvent.jsp?successfull=true");
         }
     }
 }

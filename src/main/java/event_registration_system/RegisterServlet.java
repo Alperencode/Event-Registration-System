@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSession;
 
 public class RegisterServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -48,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
         } else {
             // >0 : Registration successfull
             HttpSession session = request.getSession();
-            session.setAttribute("user", user.getUserID());
+            session.setAttribute("user", UserDAO.getUser(userID));
             response.sendRedirect("index.jsp");
         }
     }
