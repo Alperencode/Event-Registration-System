@@ -52,7 +52,7 @@ public class CreateEventServlet extends HttpServlet {
         
         // Try to register event
         try {
-            returnValue = EventDAO.registerEvent(event);
+            returnValue = EventDAO.createEvent(event);
         } catch (ParseException ex) {
             response.sendRedirect("Event/EventCreation.jsp?connError=true");
         }

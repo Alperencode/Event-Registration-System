@@ -33,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
         int returnValue = 0;
         
         // Try to register user
-        returnValue = UserDAO.registerUser(user);
+        returnValue = UserDAO.createUser(user);
         
         // Redirect according to returnValue
         if (returnValue == -1) {

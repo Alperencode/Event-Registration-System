@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
-    // Methods for CRUD operations on the Users table
+    // Methods for CRUD operations on the users table
 
     public static User getUser(String userID) {
         // Prepare query to search database for user with given userID
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE userID = ?")) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM Users WHERE userID = ?")) {
             preparedStatement.setString(1, userID);
 
             // Execute query
@@ -38,7 +39,8 @@ public class UserDAO {
         String hashedPassword = Hash.hashPassword(password);
 
         // Prepare query to search database for username and email        
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM Users WHERE username = ? AND password = ?")) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, hashedPassword);
 
@@ -62,7 +64,8 @@ public class UserDAO {
 
     public static boolean checkUsernameExists(String username) {
         //  Prepare query to search database for same username
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username LIKE ?")) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM users WHERE username LIKE ?")) {
             preparedStatement.setString(1, username);
 
             // Execute query
@@ -78,7 +81,8 @@ public class UserDAO {
 
     public static boolean checkEmailExists(String email) {
         //  Prepare query to search database for same email
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email LIKE ?")) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM users WHERE email LIKE ?")) {
             preparedStatement.setString(1, email);
 
             // Execute query
@@ -92,7 +96,7 @@ public class UserDAO {
         }
     }
 
-    public static int registerUser(User user) {
+    public static int createUser(User user) {
         if (checkUsernameExists(user.getUsername())) {
             // -1: Username already exists
             return -1;
@@ -121,4 +125,45 @@ public class UserDAO {
             return 0;
         }
     }
+
+    public static boolean deteleUser(String userID) throws SQLException {
+        // Prepare query to search database for user with given userID
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM users WHERE userID = ?")) {
+            preparedStatement.setString(1, userID);
+
+            // Execute the delete query
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Return true to indicate user is deleted
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static int updateUser(User user) {
+        // Prepare query to update user information
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE Users SET username = ?, email = ?, password = ? WHERE UserID = ?")) {
+
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getUserID());
+
+            // Execute query
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Return rowsAffected to indicate ">0"
+            // >0 : Successfull update
+            return rowsAffected;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // 0 : SQL query or database connection failed
+            return 0;
+        }
+    }
+
 }

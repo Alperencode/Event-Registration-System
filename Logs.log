@@ -1,3 +1,7 @@
+Abbreviations:
+- DAO: Data Access Object
+- CRUD: Create Read Update Delete
+
 11/18/2023:
 - Setup MySQL database completed [used Xampp]
 - Created db named "event_registration_system"
@@ -50,9 +54,13 @@
 - Add association table related functions [Can be updated]
 
 12/07/2023:
+-- Night
 - Refactor entire OOP implementation
 - Redesign events table to add missing columns [Events: location, maxParticipant]
 - Implement encapsulation to all classes [User, Event]
 - Refactor all Servlets and DAOs to use class objects properly
 - Add user-friendly comment lines for each operation
 - Clean the code
+-- Day
+- Add and Refactor DAOs for CRUD operations
+- Add UserEventsDAO to seperate related table operations from EventDAO
