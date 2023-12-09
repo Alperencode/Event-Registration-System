@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDAO {
     // Methods for CRUD operations on the events table
@@ -35,7 +37,7 @@ public class EventDAO {
 
         //  Prepare query to create new event
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO events (eventID, eventName, eventDate, eventTime, eventLocation, maxParcitipant, shortDescription, longDescription, image, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO events (eventID, eventName, eventDate, eventTime, eventLocation, maxParticipant, shortDescription, longDescription, image, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, event.getEventID());
             preparedStatement.setString(2, event.getEventName());
             preparedStatement.setString(3, event.getEventDate());
@@ -113,5 +115,39 @@ public class EventDAO {
             // 0 : SQL query or database connection failed
             return 0;
         }
+    }
+
+    public static List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+
+        // Prepare query to select all events
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events ORDER BY eventDate ASC, eventTime ASC");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Iterate through the result set and create Event objects
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getString("eventID"),
+                        resultSet.getString("eventName"),
+                        resultSet.getString("eventDate"),
+                        resultSet.getString("eventTime"),
+                        resultSet.getString("eventLocation"),
+                        resultSet.getInt("maxParticipant"),
+                        resultSet.getString("shortDescription"),
+                        resultSet.getString("longDescription"),
+                        resultSet.getString("image"),
+                        resultSet.getString("organizerID")
+                );
+
+                events.add(event);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL errors or database connection issues
+        }
+
+        return events;
     }
 }

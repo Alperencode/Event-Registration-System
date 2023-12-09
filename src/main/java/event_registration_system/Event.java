@@ -60,7 +60,7 @@ public class Event {
         return eventLocation;
     }
 
-    public void setLocation(String eventLocation) {
+    public void setEventLocation(String eventLocation) {
         this.eventLocation = eventLocation;
     }
 
