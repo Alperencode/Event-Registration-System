@@ -77,3 +77,10 @@ Abbreviations:
 - Header -> finish the header hyperlinks and data [Design can be updated]
 -- Remove following:
 - EventCreation -> updated to new design and named EventCreation
+
+12/08/2023:
+- Start displaying the database information on the pages.
+-- Add following pages:
+- logOut, EventPage
+-- Work on following pages:
+- Events, MyEvents, EventPage

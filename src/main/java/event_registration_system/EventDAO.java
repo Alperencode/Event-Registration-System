@@ -121,9 +121,7 @@ public class EventDAO {
         List<Event> events = new ArrayList<>();
 
         // Prepare query to select all events
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events ORDER BY eventDate ASC, eventTime ASC");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events ORDER BY eventDate ASC, eventTime ASC"); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             // Iterate through the result set and create Event objects
             while (resultSet.next()) {
@@ -150,4 +148,38 @@ public class EventDAO {
 
         return events;
     }
+
+    public static Event getEvent(String eventID) {
+        // Prepare query to search database for user with given userID
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM events WHERE eventID = ?")) {
+            preparedStatement.setString(1, eventID);
+
+            // Execute query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // If user found, return User object
+                    Event event = new Event(
+                            resultSet.getString("eventID"),
+                            resultSet.getString("eventName"),
+                            resultSet.getString("eventDate"),
+                            resultSet.getString("eventTime"),
+                            resultSet.getString("eventLocation"),
+                            resultSet.getInt("maxParticipant"),
+                            resultSet.getString("shortDescription"),
+                            resultSet.getString("longDescription"),
+                            resultSet.getString("image"),
+                            resultSet.getString("organizerID")
+                    );
+                    return event;
+                } else {
+                    return null; // Return null to indicate no user found
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

@@ -15,7 +15,6 @@ public class CreateEventServlet extends HttpServlet {
 
         // Get Parameters from form
         String image = request.getParameter("image");
-        System.out.println("image: "+image);
         String eventName = request.getParameter("eventName");
         String eventDateTime = request.getParameter("eventDateTime");
         String maxParcitipantString = request.getParameter("maxParticipant");
@@ -42,7 +41,7 @@ public class CreateEventServlet extends HttpServlet {
                 eventID, eventName, eventDate, eventTime, location,
                 maxParcitipant, shortDescription, longDescription, image, organizerID
             );
-        } catch (NumberFormatException | ParseException e) {
+        } catch (Exception e) {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         }
 

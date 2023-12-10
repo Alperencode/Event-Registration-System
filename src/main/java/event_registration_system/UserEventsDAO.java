@@ -2,8 +2,11 @@ package event_registration_system;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserEventsDAO {
     // Methods for CRUD operations on the user_events table
@@ -37,7 +40,6 @@ public class UserEventsDAO {
         // Prepare query to delete a record from user_events
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "DELETE FROM user_events WHERE userEventID = ?")) {
-
             preparedStatement.setString(1, userEventID);
 
             // Execute query
@@ -52,6 +54,30 @@ public class UserEventsDAO {
             // 0 : SQL query or database connection failed
             return 0;
         }
+    }
+
+    public static List<Event> getUserEvents(String userID, String eventType) {
+        List<Event> events = new ArrayList<>();
+
+        // Prepare query to select user's all event with specified type
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM user_events WHERE userID = ? and eventType = ?")) {
+            preparedStatement.setString(1, userID);
+            preparedStatement.setString(2, eventType);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Iterate through the result set and create Event objects
+            while (resultSet.next()) {
+                events.add(EventDAO.getEvent(resultSet.getString("eventID")));
+            }
+            return events;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL errors or database connection issues
+        }
+
+        return events;
     }
 
 }
