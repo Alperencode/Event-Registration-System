@@ -9,6 +9,7 @@
     </head>
     <body>
         <%@include file="../Header/header.jsp" %>
+        <% if(user == null){ response.sendRedirect("../Login/login.jsp"); } %>
 
         <form action="/Event-Registration-System/CreateEventServlet" method="POST">
 

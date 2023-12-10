@@ -16,6 +16,8 @@
     </head>
     <body>
         <%@include  file="../Header/header.jsp" %>
+        <% if(user == null){ response.sendRedirect("../Login/login.jsp"); } %>
+
 
         <!-- Hosting/Joined/Saved buttons -->
         <div class="button-container">
