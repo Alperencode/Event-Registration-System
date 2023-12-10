@@ -46,8 +46,8 @@
                 </div>
             </div>
             <%} else {%>
-                <a href = "Login/login.jsp">Login</a>
-                <a href = "Login/register.jsp">Register</a>
+                <a href = "${pageContext.request.contextPath}/Login/login.jsp">Login</a>
+                <a href = "${pageContext.request.contextPath}/Login/register.jsp">Register</a>
             <%}%>
 
         </header>

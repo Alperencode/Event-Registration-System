@@ -14,11 +14,9 @@
     <body>
         <%@include file="/Header/header.jsp" %>
 
-        <h1>Event Registration System</h1>
         <%
             if (user != null) {
         %>
-        <h1>Welcome <% out.println(user.getUsername()); %></h1>
         <%
             }
         %>
@@ -31,14 +29,16 @@
             <div class="card">
                 <img src="${pageContext.request.contextPath}/Images/image.jpg"> 
                 <div>
-                    <div id="eventName" style="cursor: pointer; color: #333; text-decoration: underline;" onclick="goToEventPage()">
-                        <h2><% out.println(events.get(i).getEventName()); %></h2>
-                    </div>
-                        <h3>Host: <% out.println(UserDAO.getUser(events.get(i).getOrganizerID()).getUsername());  %></h3>
+                    <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<% out.println(events.get(i).getEventID());%>" >
+                        <div id="eventName" style="cursor: pointer; color: #333; text-decoration: underline;">
+                            <h2><% out.println(events.get(i).getEventName()); %></h2>
+                        </div>
+                    </a>
+                    <h3>Host: <% out.println(UserDAO.getUser(events.get(i).getOrganizerID()).getUsername());  %></h3>
                     <h3>Date: <% out.println(events.get(i).getEventDate()); %></h3>
                     <h3>Time: <% out.println(events.get(i).getEventTime()); %> </h3>
                     <h3>Location: <% out.println(events.get(i).getEventLocation()); %></h3>
-                    <h3>Short description: <% out.println(events.get(i).getShortDescription()); %></h3>
+                    <h3>Description: <% out.println(events.get(i).getShortDescription()); %></h3>
                 </div>
             </div>
         </div>
