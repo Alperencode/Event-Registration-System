@@ -38,12 +38,13 @@
                             <a class="nav-link" href="${pageContext.request.contextPath}/Event/Events.jsp">Events</a>
                         </li>
                         <% if (user == null) {%>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/Login/login.jsp">Sign In</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/FAQ/faq.jsp">FAQ</a>
                         </li>
-
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/Login/register.jsp">Sign Up</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/Privacy/privacy.jsp">Privacy</a>
                         </li>
 
                         <%} else {%>
@@ -53,11 +54,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link">Welcome <%out.println(user.getUsername() + "!");%></a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/Event/CreateEvent.jsp">Create Event</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/Account/Account.jsp">Account Settings</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link">Welcome <%out.println(user.getUsername() + "!");%></a>
                         </li>
 
                         <li class="nav-item">
@@ -66,6 +71,11 @@
 
                         <%}%>
                     </ul>
+                    <%if (user == null) {%>
+                    <div class="d-none d-lg-block">
+                        <a href="${pageContext.request.contextPath}/Login/login.jsp" class="bi-person custom-icon me-3"></a>
+                    </div>
+                    <%}%>
                 </div>
             </div>
         </nav>
