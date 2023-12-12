@@ -76,6 +76,11 @@ This project is a collaborative effort. If you're part of the development team, 
 
 If you encounter issues or find bugs in the project, please report them using the GitHub issue tracker.
 
+## Contributers
+
+- Alperen Ağa
+- Şimal Arifoğlu
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
