@@ -1,78 +1,98 @@
 <%@page import="event_registration_system.UserEventsDAO"%>
-<%@page import="event_registration_system.UserDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="event_registration_system.EventDAO"%>
+<%@page import="event_registration_system.EventDAO"%>
 <%@page import="event_registration_system.Event"%>
-<!DOCTYPE HTML5>
+<%@page import="event_registration_system.Event"%>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ERS</title>
-        <link rel="stylesheet" href="css/cards.css">
-        <script src="js/searchButton.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Events</title>
     </head>
+
     <body>
-        <%@include  file="../Header/header.jsp" %>
-        <% if(user == null){ response.sendRedirect("../Login/login.jsp"); } %>
+        <%@include file="/Header/header.jsp" %>
+        <% if (user == null) {
+                response.sendRedirect("../Login/login.jsp");
+                return;
+            } %>
 
-
-        <!-- Hosting/Joined/Saved buttons -->
-        <div class="button-container">
-            <a href="MyEvents.jsp?eventType=Hosting&pages=1" style="text-decoration:none; color: inherit;">
-                <button class="button">
-                    Hosting
-                </button>
-            </a>
-            <a href="MyEvents.jsp?eventType=Joined&pages=1" style="text-decoration:none; color: inherit;">
-                <button class="button">
-                    Joined
-                </button>
-            </a>
-            <a href="MyEvents.jsp?eventType=Saved&pages=1" style="text-decoration:none; color: inherit;">
-                <button class="button">
-                    Saved
-                </button>
-            </a>
-
-            <div class="search-main">
-                <input type="text" class="tbox-search" onfocus="setPlaceholder()">
-                <a class="btn-search">
-                    <i class="fa fa-search"></i>
-                </a>
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
             </div>
-        </div>
+        </section>
 
-        <%
-            if (request.getParameter("eventType") != null) {
-                List<Event> events = UserEventsDAO.getUserEvents(user.getUserID(), request.getParameter("eventType"));
-                for (int i = 0; i < events.size(); i++) {
-        %>
-        <div class="card-container">
-            <div class="card">
-                <img src="${pageContext.request.contextPath}/Images/image.jpg"> 
-                <div>
-                    <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<% out.println(events.get(i).getEventID());%>" >
-                        <div id="eventName" style="cursor: pointer; color: #333; text-decoration: underline;">
-                            <h2><% out.println(events.get(i).getEventName()); %></h2>
+        <main>
+
+            <%
+                String eventType = request.getParameter("eventType");
+                eventType = eventType == null ? "Hosting" : eventType;
+                if (eventType != null) {
+                    List<Event> events = UserEventsDAO.getUserEvents(user.getUserID(), eventType);
+            %>
+            <header class="site-header section-padding d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-12">
+                            <h1>
+                                <span class="d-block text-primary">Here is your</span>
+                                <span class="d-block text-dark"><%out.println(eventType);%> Events!</span>
+                            </h1>
                         </div>
-                    </a>
-                    <h3>Host: <% out.println(UserDAO.getUser(events.get(i).getOrganizerID()).getUsername());  %></h3>
-                    <h3>Date: <% out.println(events.get(i).getEventDate()); %></h3>
-                    <h3>Time: <% out.println(events.get(i).getEventTime()); %> </h3>
-                    <h3>Location: <% out.println(events.get(i).getEventLocation()); %></h3>
-                    <h3>Description: <% out.println(events.get(i).getShortDescription()); %></h3>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <br><br><br>
-        <%}
-            }%>
+            </header>
+            <a href="MyEvents.jsp?eventType=Hosting" class="btn custom-btn" style="margin-left:250px;margin-top:50px;">Hosting Events</a>
+            <a href="MyEvents.jsp?eventType=Joined" class="btn custom-btn" style="margin-left:250px;margin-top:50px;">Joined Events</a>
+            <a href="MyEvents.jsp?eventType=Saved" class="btn custom-btn" style="margin-left:250px;margin-top:50px;">Saved Events</a>
+            <section class="products section-padding">
+                <div class="container">
+                    <div class="row">
 
-        <%@include  file="../Pages/pages.jsp" %>
+                        <div class="col-12">
+                            <h2 class="mb-5"> <% out.println(eventType); %> Events</h2>
+                        </div>
 
-        <script src="js/searchButton.js"></script>
+                        <%
+                                if (events.size() == 0) {%>
+                        <br>
+                        <p class="text-center" style="color:gray;font-size: 36px;font-weight: bold">You have no <%out.println(eventType);%> Events...</p>
+                        <%} else {
+                                for (int i = 0; i < events.size(); i++) {%>
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
+                                    <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex"></div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>" class="product-title-link"><% out.println(events.get(i).getEventName()); %></a>
+                                        </h5>
+
+                                        <p class="product-p"><% out.println(events.get(i).getShortDescription()); %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%}
+                                }%>
+                    </div>
+                </div>
+            </section>
+            <%}%>
+
+        </main>
+        <%@include file="/Footer/footer.jsp" %>
     </body>
 </html>

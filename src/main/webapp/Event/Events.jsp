@@ -1,41 +1,82 @@
-<%@page import="event_registration_system.UserDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.List"%>
+<%@page import="event_registration_system.EventDAO"%>
 <%@page import="event_registration_system.EventDAO"%>
 <%@page import="event_registration_system.Event"%>
 <%@page import="event_registration_system.Event"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Event/css/cards.css">
-        <title>My Events</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Events</title>
     </head>
+    
     <body>
         <%@include file="/Header/header.jsp" %>
-        <br><br><br>
-        <%
-            List<Event> events = EventDAO.getAllEvents();
-            for (int i = 0; i < events.size(); i++) { %>
-     <div class="card-container">
-            <div class="card">
-                <img src="${pageContext.request.contextPath}/Images/image.jpg"> 
-                <div>
-                    <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<% out.println(events.get(i).getEventID());%>" >
-                        <div id="eventName" style="cursor: pointer; color: #333; text-decoration: underline;">
-                            <h2><% out.println(events.get(i).getEventName()); %></h2>
-                        </div>
-                    </a>
-                    <h3>Host: <% out.println(UserDAO.getUser(events.get(i).getOrganizerID()).getUsername());  %></h3>
-                    <h3>Date: <% out.println(events.get(i).getEventDate()); %></h3>
-                    <h3>Time: <% out.println(events.get(i).getEventTime()); %> </h3>
-                    <h3>Location: <% out.println(events.get(i).getEventLocation()); %></h3>
-                    <h3>Description: <% out.println(events.get(i).getShortDescription()); %></h3>
-                </div>
+
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
             </div>
-        </div>
-        <br><br><br>
-        <%}%>
+        </section>
+    
+        <main>
+
+            <header class="site-header section-padding d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-10 col-12">
+                            <h1>
+                                <span class="d-block text-primary">Choose your</span>
+                                <span class="d-block text-dark">favorite events</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="products section-padding">
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-12">
+                            <h2 class="mb-5">All Events</h2>
+                        </div>
+
+                        <%
+                            List<Event> events = EventDAO.getAllEvents();
+                            for (int i = 0; i < events.size(); i++) {%>
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
+                                    <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex"></div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>" class="product-title-link"><% out.println(events.get(i).getEventName()); %></a>
+                                        </h5>
+
+                                        <p class="product-p"><% out.println(events.get(i).getShortDescription()); %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <%@include file="/Footer/footer.jsp" %>
     </body>
 </html>
