@@ -29,6 +29,8 @@
 
                                 <h1 class="hero-title text-center mb-5">Sign In to ERS</h1>
 
+                                <div class="div-separator w-50 m-auto my-5"><span></span></div>
+
                                 <div class="row">
                                     <div class="col-lg-8 col-11 mx-auto">
                                         <form role="form" method="post">
@@ -46,7 +48,6 @@
                                             </div>
 
                                             <%
-                                                // If login fails
                                                 if (request.getParameter("error") != null && request.getParameter("error").equals("true")) {%>
                                             <br>
                                             <p class="text-center" style="color:red;">Invalid email or password, please try again</p>
@@ -56,7 +57,7 @@
                                                 Sign in
                                             </button>
 
-                                            <p class="text-center">Do you have an account? <a href="register.jsp">Create One</a></p>
+                                            <p class="text-center">Don't you have an account? <a href="register.jsp">Create One</a></p>
 
                                         </form>
                                     </div>

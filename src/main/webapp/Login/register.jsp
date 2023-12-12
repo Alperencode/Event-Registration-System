@@ -48,7 +48,7 @@
                                         </div>
 
                                         <div class="form-floating my-4">
-                                            <input type="password" name="password" id="password" pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="Password" required>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 
                                             <label for="password">Password</label>
 
