@@ -27,7 +27,7 @@ public class CreateEventServlet extends HttpServlet {
 
         // Initialize empty event object
         Event event = new Event();
-        
+
         // Setup event values
         String organizerID = ((User) session.getAttribute("user")).getUserID();
         String eventID = Hash.generateUniqueId(eventName);
@@ -35,26 +35,37 @@ public class CreateEventServlet extends HttpServlet {
             String eventDate = Converters.convertDate(eventDateTime);
             String eventTime = Converters.convertTime(eventDateTime);
             int maxParcitipant = Integer.parseInt(maxParcitipantString);
-            
+
             // Assign event object values
             event = new Event(
-                eventID, eventName, eventDate, eventTime, location,
-                maxParcitipant, shortDescription, longDescription, image, organizerID
+                    eventID, eventName, eventDate, eventTime, location,
+                    maxParcitipant, shortDescription, longDescription, image, organizerID
             );
         } catch (Exception e) {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
+            return;
         }
 
         // Initialize return value
         int returnValue = 0;
-        
-        // Try to register event
+
+        String operation = request.getParameter("operation");
+
+        // Try to execute the operation
         try {
-            returnValue = EventDAO.createEvent(event);
+            switch (operation) {
+                case "Update":
+                    returnValue = EventDAO.updateEvent(event);
+                    break;
+                case "Create":
+                    returnValue = EventDAO.createEvent(event);
+                    break;
+            }
+            
         } catch (ParseException ex) {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         }
-        
+
         // Redirect according to returnValue
         if (returnValue == -1) {
             // -1: EventName already exists

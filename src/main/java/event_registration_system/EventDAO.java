@@ -90,7 +90,7 @@ public class EventDAO {
         // Prepare query to update event information
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, "
-                + "location = ?, maxParticipant = ?, description = ?, organizerID = ? WHERE eventID = ?")) {
+                + "eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ?, image = ?, organizerID = ? WHERE eventID = ?")) {
 
             preparedStatement.setString(1, event.getEventName());
             preparedStatement.setString(2, event.getEventDate());
@@ -121,7 +121,9 @@ public class EventDAO {
         List<Event> events = new ArrayList<>();
 
         // Prepare query to select all events
-        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM events ORDER BY eventDate ASC, eventTime ASC"); ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM events ORDER BY eventDate ASC, eventTime ASC"); 
+            ResultSet resultSet = preparedStatement.executeQuery()) {
 
             // Iterate through the result set and create Event objects
             while (resultSet.next()) {
@@ -182,4 +184,8 @@ public class EventDAO {
         }
     }
 
+    public static int getParticipant(String eventID){
+        return UserEventsDAO.getUserEventsByEventID(eventID, "Joined").size();
+        
+    }
 }

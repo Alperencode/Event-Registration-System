@@ -13,15 +13,16 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         // Validate the user against the database using UserDAO
-        String userID = UserDAO.validateUser(username, password);
+        String userID = UserDAO.validateUser(email, password);
         if (userID != null) {
+            User user = UserDAO.getUser(userID);
             // If valid, create a session and redirect to a index page with session
             HttpSession session = request.getSession();
-            session.setAttribute("user", UserDAO.getUser(userID));
+            session.setAttribute("user", user);
             response.sendRedirect("index.jsp");
         } else {
             // If invalid, redirect back to the login page with an error message

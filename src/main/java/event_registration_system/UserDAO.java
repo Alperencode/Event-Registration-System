@@ -34,14 +34,14 @@ public class UserDAO {
         }
     }
 
-    public static String validateUser(String username, String password) {
+    public static String validateUser(String email, String password) {
         // Hash the password before compare it
         String hashedPassword = Hash.hashPassword(password);
 
         // Prepare query to search database for username and email        
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM Users WHERE username = ? AND password = ?")) {
-            preparedStatement.setString(1, username);
+                "SELECT * FROM Users WHERE email = ? AND password = ?")) {
+            preparedStatement.setString(1, email);
             preparedStatement.setString(2, hashedPassword);
 
             // Execute query
