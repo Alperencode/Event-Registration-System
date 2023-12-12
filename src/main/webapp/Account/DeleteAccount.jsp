@@ -11,6 +11,7 @@
         <%
             if (user == null) {
                 response.sendRedirect("../Login/login.jsp");
+                return;
             }
             if(UserDAO.deteleUser(user.getUserID())){
                 response.sendRedirect("LogOut.jsp");

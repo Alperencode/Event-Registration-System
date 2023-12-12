@@ -17,23 +17,35 @@
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-
+            
             boolean isUsername = username != null && username.length() > 0;
             boolean isEmail = email != null && email.length() > 0;
             boolean isPassword = password != null && password.length() > 0;
 
             if (isUsername) {
+                if (UserDAO.checkUsernameExists(username)) {
+                    response.sendRedirect("Account.jsp?usernameExist=true");
+                    return;
+                }
                 user.setUsername(username);
             }
             if (isEmail) {
+                if (UserDAO.checkEmailExists(email)) {
+                    response.sendRedirect("Account.jsp?emailExist=true");
+                    return;
+                }
                 user.setEmail(email);
             }
             if (isPassword) {
                 user.setPassword(Hash.hashPassword(password));
             }
             if (isUsername || isEmail || isPassword) {
-                UserDAO.updateUser(user);
-                response.sendRedirect("Account.jsp?success=true");
+                int result = UserDAO.updateUser(user);
+                if (result > 0) {
+                    response.sendRedirect("Account.jsp?success=true");
+                } else {
+                    response.sendRedirect("Account.jsp?connError=true");
+                }
             } else {
                 response.sendRedirect("Account.jsp?emptyUpdate=true");
             }
