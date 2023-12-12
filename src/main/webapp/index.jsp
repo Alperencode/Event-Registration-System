@@ -156,15 +156,15 @@
 
                                         <div class="col-lg-5 col-12">
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3"><span>Events</span><br>you<span> Host</span></h4>
+                                                <h4 class="mb-3">Check <span>Events</span><br>you<span> Host</span></h4>
 
                                                 <p>Little Fashion templates comes with <a href="sign-in.html">sign in</a> / <a href="sign-up.html">sign up</a> pages, product listing / product detail, about, FAQs, and contact page.</p>
 
                                                 <p>Since this HTML template is based on Boostrap 5 CSS library, you can feel free to add more components as you need.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="about.html" class="custom-link mb-2">
-                                                        Learn more
+                                                    <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Hosting" class="custom-link mb-2">
+                                                        Hosting Events
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
                                                 </div>
@@ -189,8 +189,8 @@
                                                 <p>Custom work is branding, web design, UI/UX design</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="contact.html" class="custom-link mb-2">
-                                                        Learn More
+                                                    <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Joined" class="custom-link mb-2">
+                                                        Joined Events
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
                                                 </div>
@@ -212,8 +212,8 @@
                                                 <p>Over three years in business, We’ve had the chance on projects</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="products.html" class="custom-link mb-2">
-                                                        Learn More
+                                                    <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Saved" class="custom-link mb-2">
+                                                        Saved Events
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
                                                 </div>
@@ -238,7 +238,7 @@
                                                 <p>Custom work is branding, web design, UI/UX design</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="contact.html" class="custom-link mb-2">
+                                                    <a href="${pageContext.request.contextPath}/Event/CreateEvent.jsp" class="custom-link mb-2">
                                                         Create Event
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
@@ -262,12 +262,19 @@
                             <h2 class="mb-5">Up-coming Events</h2>
                         </div>
                         <%
+                            int size;
                             List<Event> events = EventDAO.getAllEvents();
-                            for (int i = 0; i < 3; i++) {%>
+                            if (events.size() >= 3) {
+                                size = 3;
+                            } else {
+                                size = events.size();
+                            }
+                            for (int i = 0; i < size; i++) {
+                        %>
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
+                                    <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex"></div>
@@ -275,7 +282,7 @@
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link"><% out.println(events.get(i).getEventName()); %></a>
+                                            <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>" class="product-title-link"><% out.println(events.get(i).getEventName()); %></a>
                                         </h5>
 
                                         <p class="product-p"><% out.println(events.get(i).getShortDescription()); %></p>
