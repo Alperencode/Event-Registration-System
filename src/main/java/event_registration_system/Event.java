@@ -5,10 +5,10 @@ public class Event {
     private String 
             eventID, eventName, eventDate,
             eventTime, eventLocation, shortDescription,
-            longDescription, image, organizerID;
+            longDescription, organizerID;
     private int maxParticipant;
 
-    public Event(String eventID, String eventName, String eventDate, String eventTime, String eventLocation, int maxParticipant, String shortDescription, String longDescription, String image, String organizerID) {
+    public Event(String eventID, String eventName, String eventDate, String eventTime, String eventLocation, int maxParticipant, String shortDescription, String longDescription, String organizerID) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -17,7 +17,6 @@ public class Event {
         this.maxParticipant = maxParticipant;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
-        this.image = image;
         this.organizerID = organizerID;
     }
 
@@ -86,14 +85,6 @@ public class Event {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getOrganizerID() {

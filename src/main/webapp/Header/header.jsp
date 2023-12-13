@@ -31,6 +31,7 @@
                                 cookie = cookies[i];
                                 if (cookie.getName().equals("userID")) {
                                     user = UserDAO.getUser(cookie.getValue());
+                                    session.setAttribute("user", user);
                                 }
                             }
                         }

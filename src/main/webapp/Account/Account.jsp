@@ -63,13 +63,6 @@
                                 if (request.getParameter("deleteFailed") != null && request.getParameter("deleteFailed").equals("true")) { %>
                             <p class="text-center" style="color:red;">Account deletion failed, please try again.</p>
                             <%}%>
-                            <div class="event-container">
-                                <div class="upload-area" onclick="openFileExplorer()">
-                                    <input type="file" id="fileInput" accept="image/*" style="display: none" onchange="loadImage()">
-                                    <img id="uploadedImage">
-                                    <p id="uploadText">Click to upload</p>
-                                </div>
-                            </div> 
                             <br>
                             <p>E-mail:</p>
                             <div class="form-floating mb-4 p-0">

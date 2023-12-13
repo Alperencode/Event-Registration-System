@@ -37,7 +37,7 @@ public class EventDAO {
 
         //  Prepare query to create new event
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO events (eventID, eventName, eventDate, eventTime, eventLocation, maxParticipant, shortDescription, longDescription, image, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO events (eventID, eventName, eventDate, eventTime, eventLocation, maxParticipant, shortDescription, longDescription, organizerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, event.getEventID());
             preparedStatement.setString(2, event.getEventName());
             preparedStatement.setString(3, event.getEventDate());
@@ -46,8 +46,7 @@ public class EventDAO {
             preparedStatement.setInt(6, event.getMaxParticipant());
             preparedStatement.setString(7, event.getShortDescription());
             preparedStatement.setString(8, event.getLongDescription());
-            preparedStatement.setString(9, event.getImage());
-            preparedStatement.setString(10, event.getOrganizerID());
+            preparedStatement.setString(9, event.getOrganizerID());
 
             // Execute query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -89,7 +88,7 @@ public class EventDAO {
     public static int updateEvent(Event event) {
         // Prepare query to update event information
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ?, image = ? WHERE eventID = ?")) {
+                "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ? WHERE eventID = ?")) {
 
             System.out.println("Setting parameters");
             preparedStatement.setString(1, event.getEventName());
@@ -99,8 +98,7 @@ public class EventDAO {
             preparedStatement.setInt(5, event.getMaxParticipant());
             preparedStatement.setString(6, event.getShortDescription());
             preparedStatement.setString(7, event.getLongDescription());
-            preparedStatement.setString(8, event.getImage());
-            preparedStatement.setString(9, event.getEventID());
+            preparedStatement.setString(8, event.getEventID());
 
             // Execute query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -135,7 +133,6 @@ public class EventDAO {
                         resultSet.getInt("maxParticipant"),
                         resultSet.getString("shortDescription"),
                         resultSet.getString("longDescription"),
-                        resultSet.getString("image"),
                         resultSet.getString("organizerID")
                 );
 
@@ -169,7 +166,6 @@ public class EventDAO {
                             resultSet.getInt("maxParticipant"),
                             resultSet.getString("shortDescription"),
                             resultSet.getString("longDescription"),
-                            resultSet.getString("image"),
                             resultSet.getString("organizerID")
                     );
                     return event;
@@ -202,7 +198,6 @@ public class EventDAO {
                         resultSet.getInt("maxParticipant"),
                         resultSet.getString("shortDescription"),
                         resultSet.getString("longDescription"),
-                        resultSet.getString("image"),
                         resultSet.getString("organizerID")
                 );
 

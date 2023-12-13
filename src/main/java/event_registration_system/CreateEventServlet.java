@@ -14,7 +14,6 @@ public class CreateEventServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Get Parameters from form
-        String image = request.getParameter("image");
         String eventName = request.getParameter("eventName");
         String eventDateTime = request.getParameter("eventDateTime");
         String maxParcitipantString = request.getParameter("maxParticipant");
@@ -41,7 +40,7 @@ public class CreateEventServlet extends HttpServlet {
             // Assign event object values
             event = new Event(
                     eventID, eventName, eventDate, eventTime, location,
-                    maxParcitipant, shortDescription, longDescription, image, organizerID
+                    maxParcitipant, shortDescription, longDescription, organizerID
             );
         } catch (Exception e) {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
