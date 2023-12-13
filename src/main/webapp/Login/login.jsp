@@ -36,17 +36,19 @@
                                         <form role="form" method="post">
 
                                             <div class="form-floating mb-4 p-0">
-                                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
+                                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*\.com" class="form-control" placeholder="Email address" maxlength="100" required>
 
                                                 <label for="email">Email address</label>
                                             </div>
 
                                             <div class="form-floating p-0">
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" maxlength="100" required>
 
                                                 <label for="password">Password</label>
                                             </div>
-
+                                            <br>
+                                            <p class="text-left"><input type="checkbox" name="rememberMe" value="true">  Remember Me </p>
+                                            
                                             <%
                                                 if (request.getParameter("error") != null && request.getParameter("error").equals("true")) {%>
                                             <br>

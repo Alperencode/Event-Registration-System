@@ -36,19 +36,19 @@
                                     <form action="/Event-Registration-System/RegisterServlet" role="form" method="post">
 
                                         <div class="form-floating">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" maxlength="100" required>
 
                                             <label for="username">Username</label>
                                         </div>
 
                                         <div class="form-floating my-4">
-                                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
+                                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*\.com" class="form-control" maxlength="100" placeholder="Email address" required>
 
                                             <label for="email">Email address</label>
                                         </div>
 
                                         <div class="form-floating my-4">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                                            <input type="password" name="password" id="password" class="form-control" maxlength="100" placeholder="Password" required>
 
                                             <label for="password">Password</label>
 

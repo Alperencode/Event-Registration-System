@@ -223,48 +223,8 @@
             <br>
             <p class="text-center" style="color:red;font-size: 36px;font-weight: bold">Event Not Found</p>
             <%}%>
-            <section class="related-product section-padding border-top">
-                <div class="container">
-                    <div class="row">
 
-                        <div class="col-12">
-                            <h3 class="mb-5">You might also like</h3>
-                        </div>
-
-
-                        <%
-                            int size;
-                            List<Event> events = EventDAO.getAllEvents();
-                            if (events.size() >= 3) {
-                                size = 3;
-                            } else {
-                                size = events.size();
-                            }
-                            for (int i = 0; i < size; i++) {%>
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
-                                    <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex"></div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>" class="product-title-link"><% out.println(events.get(i).getEventName()); %></a>
-                                        </h5>
-
-                                        <p class="product-p"><% out.println(events.get(i).getShortDescription()); %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%}%>
-                    </div>
-                </div>
-            </section>
-
+            <%@include file="/YMAL/YouMightAlsoLike.jsp" %>
         </main>
         <%@include file="/Footer/footer.jsp" %>
 

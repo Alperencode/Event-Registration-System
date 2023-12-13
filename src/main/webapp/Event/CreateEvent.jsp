@@ -76,7 +76,7 @@
 
                             <p>Date / Time:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="datetime-local" name="eventDateTime" id="eventDateTime" class="form-control" maxlength="100" placeholder="Enter Date/Time" required>
+                                <input type="datetime-local" name="eventDateTime" id="eventDateTime" class="form-control" placeholder="Enter Date/Time" required>
                                 <label for="eventDateTime">Date / Time</label>
                             </div>
 
@@ -116,6 +116,7 @@
                                         if (UserEventsDAO.isUser(user.getUserID(), eventID, "Hosting")) {%>
                                 <input type="hidden" name="operation" value="Update">
                                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <input type="hidden" name="eventID" value="<%out.println(eventID);%>">
                                     <button type="submit" class="btn custom-btn cart-btn" data-bs-toggle="modal" data-bs-target="#cart-modal" >UPDATE</button>
                                 </div>
                                 <%} else {%>

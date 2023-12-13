@@ -58,7 +58,7 @@
                             <p class="text-center" style="color:red;">Email already exists, try another one</p>
                             <% }
                                 if (request.getParameter("connError") != null && request.getParameter("connError").equals("true")) { %>
-                            <p class="text-center" style="color:red;">Something went wront, please try again</p>
+                            <p class="text-center" style="color:red;">Something went wrong, please try again</p>
                             <% }
                                 if (request.getParameter("deleteFailed") != null && request.getParameter("deleteFailed").equals("true")) { %>
                             <p class="text-center" style="color:red;">Account deletion failed, please try again.</p>
@@ -73,20 +73,20 @@
                             <br>
                             <p>E-mail:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Enter new email address">
+                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*\.com" class="form-control" placeholder="Enter new email address" maxlength="100">
                                 <label for="email">Your new email</label>
                             </div>
 
                             <p>Username:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter new username">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter new username" maxlength="100">
 
                                 <label for="username">Your new username</label>
                             </div>
 
                             <p>Password:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter new password">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter new password" maxlength="100">
 
                                 <label for="password">Your new password</label>
                             </div>

@@ -21,6 +21,8 @@ public class CreateEventServlet extends HttpServlet {
         String location = request.getParameter("location");
         String shortDescription = request.getParameter("shortDescription");
         String longDescription = request.getParameter("longDescription");
+        String operation = request.getParameter("operation");
+        String eventID = request.getParameter("eventID");
 
         // Get session to gather userID
         HttpSession session = request.getSession();
@@ -30,7 +32,7 @@ public class CreateEventServlet extends HttpServlet {
 
         // Setup event values
         String organizerID = ((User) session.getAttribute("user")).getUserID();
-        String eventID = Hash.generateUniqueId(eventName);
+        eventID = eventID == null ? Hash.generateUniqueId(eventName) : eventID.trim();
         try {
             String eventDate = Converters.convertDate(eventDateTime);
             String eventTime = Converters.convertTime(eventDateTime);
@@ -49,8 +51,6 @@ public class CreateEventServlet extends HttpServlet {
         // Initialize return value
         int returnValue = 0;
 
-        String operation = request.getParameter("operation");
-
         // Try to execute the operation
         try {
             switch (operation) {
@@ -61,7 +61,7 @@ public class CreateEventServlet extends HttpServlet {
                     returnValue = EventDAO.createEvent(event);
                     break;
             }
-            
+
         } catch (ParseException ex) {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         }

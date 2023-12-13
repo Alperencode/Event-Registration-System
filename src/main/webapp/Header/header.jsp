@@ -1,3 +1,4 @@
+<%@page import="event_registration_system.UserDAO"%>
 <%@page import="event_registration_system.User"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,18 @@
 
                 <%
                     User user = (User) session.getAttribute("user");
+                    if (user == null) {
+                        Cookie[] cookies = request.getCookies();
+                        if (cookies != null) {
+                            Cookie cookie;
+                            for (int i = 0; i < cookies.length; i++) {
+                                cookie = cookies[i];
+                                if (cookie.getName().equals("userID")) {
+                                    user = UserDAO.getUser(cookie.getValue());
+                                }
+                            }
+                        }
+                    }
                 %>
 
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">
@@ -31,18 +44,18 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="${pageContext.request.contextPath}/index.jsp">Home</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Home</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/Event/Events.jsp">Events</a>
                         </li>
                         <% if (user == null) {%>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/FAQ/faq.jsp">FAQ</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/Privacy/privacy.jsp">Privacy</a>
                         </li>

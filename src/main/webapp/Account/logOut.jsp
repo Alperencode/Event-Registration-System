@@ -11,7 +11,7 @@
     </head>
     
     <%
-        HttpSession currentSession = request.getSession(false);
+        HttpSession currentSession = request.getSession();
 
         if (currentSession != null) {
             Enumeration<String> attributeNames = currentSession.getAttributeNames();
@@ -26,6 +26,7 @@
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 cookie.setMaxAge(0);
+                cookie.setPath("/Event-Registration-System");
                 response.addCookie(cookie);
             }
         }

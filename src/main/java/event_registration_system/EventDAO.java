@@ -89,9 +89,9 @@ public class EventDAO {
     public static int updateEvent(Event event) {
         // Prepare query to update event information
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, "
-                + "eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ?, image = ?, organizerID = ? WHERE eventID = ?")) {
+                "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ?, image = ? WHERE eventID = ?")) {
 
+            System.out.println("Setting parameters");
             preparedStatement.setString(1, event.getEventName());
             preparedStatement.setString(2, event.getEventDate());
             preparedStatement.setString(3, event.getEventTime());
@@ -100,8 +100,7 @@ public class EventDAO {
             preparedStatement.setString(6, event.getShortDescription());
             preparedStatement.setString(7, event.getLongDescription());
             preparedStatement.setString(8, event.getImage());
-            preparedStatement.setString(9, event.getOrganizerID());
-            preparedStatement.setString(10, event.getEventID());
+            preparedStatement.setString(9, event.getEventID());
 
             // Execute query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -182,6 +181,40 @@ public class EventDAO {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    public static List<Event> getAllEventsRandomly() {
+        List<Event> events = new ArrayList<>();
+
+        // Prepare query to select all events
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM events ORDER BY RAND();"); 
+            ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Iterate through the result set and create Event objects
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getString("eventID"),
+                        resultSet.getString("eventName"),
+                        resultSet.getString("eventDate"),
+                        resultSet.getString("eventTime"),
+                        resultSet.getString("eventLocation"),
+                        resultSet.getInt("maxParticipant"),
+                        resultSet.getString("shortDescription"),
+                        resultSet.getString("longDescription"),
+                        resultSet.getString("image"),
+                        resultSet.getString("organizerID")
+                );
+
+                events.add(event);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL errors or database connection issues
+        }
+
+        return events;
     }
 
     public static int getParticipant(String eventID){
