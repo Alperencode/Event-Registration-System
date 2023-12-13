@@ -28,9 +28,9 @@ public class CreateEventServlet extends HttpServlet {
         String eventID = request.getParameter("eventID");
 
         // Process image
+        Part image = request.getPart("image");
         InputStream inputStream = null;
-        Part filePart = request.getPart("image");
-        inputStream = filePart != null ? filePart.getInputStream() : null;
+        inputStream = image != null ? image.getInputStream() : null;
         byte[] imageData = inputStream.readAllBytes();
 
         // Get session to gather userID
@@ -40,8 +40,20 @@ public class CreateEventServlet extends HttpServlet {
         Event event = new Event();
 
         // Setup event values
-        String organizerID = ((User) session.getAttribute("user")).getUserID();
-        eventID = eventID == null ? Hash.generateUniqueId(eventName) : eventID.trim();
+        User user = ((User) session.getAttribute("user"));
+        String organizerID = user.getUserID();
+
+        boolean flag = false;
+        if (eventID == null) {
+            eventID = Hash.generateUniqueId(eventName);
+        } else {
+            flag = true;
+            eventID = eventID.trim();
+        }
+        if (flag && !UserEventsDAO.isUser(user.getUserID(), eventID, "Hosting")) {
+            response.sendRedirect("Event/CreateEvent.jsp?" + eventID + "&notHost=true");
+            return;
+        }
 
         try {
             String eventDate = Converters.convertDate(eventDateTime);
@@ -72,13 +84,14 @@ public class CreateEventServlet extends HttpServlet {
             switch (operation) {
                 case "Update":
                     returnValue = EventDAO.updateEvent(event);
-                    EventImagesDAO.updateImage(eventID, imageData);
+                    if (image != null && imageData.length > 0) {
+                        EventImagesDAO.updateImage(eventID, imageData);
+                    }
+                    
                     break;
                 case "Create":
                     returnValue = EventDAO.createEvent(event);
-                    System.out.println("Calling create event");
                     EventImagesDAO.createEventImage(eventID, imageData);
-                    System.out.println("Create event finished");
                     break;
             }
 
@@ -95,10 +108,10 @@ public class CreateEventServlet extends HttpServlet {
             response.sendRedirect("Event/CreateEvent.jsp?connError=true");
         } else {
             // >0 : Registration successfull
-            if(operation.equals("Create")){
-                response.sendRedirect("Event/CreateEvent.jsp?successfullCreate=true");
-            }else if(operation.equals("Update")){
-                response.sendRedirect("Event/CreateEvent.jsp?successfullUpdate=true");
+            if (operation.equals("Create")) {
+                response.sendRedirect("Event/CreateEvent.jsp?eventID=" + eventID + "&successfullCreate=true");
+            } else if (operation.equals("Update")) {
+                response.sendRedirect("Event/CreateEvent.jsp?eventID=" + eventID + "&successfullUpdate=true");
             }
         }
     }

@@ -49,7 +49,7 @@
                     </div>
                     <%}%>
                     <div class="col-12 text-center">
-                        <a href="../Event/Events.jsp" class="view-all">View All Events</a>
+                        <a href="${pageContext.request.contextPath}/Event/Events.jsp" class="view-all">View All Events</a>
                     </div>
                 </div>
             </div>

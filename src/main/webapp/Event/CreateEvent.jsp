@@ -77,6 +77,10 @@
                             %>
                             <p style="color:green;font-size:26px;" class="text-center" > Event successfully updated! </p>
                             <%    
+                            } else if (request.getParameter("notHost") != null && request.getParameter("notHost").equals("true")) {
+                            %>
+                            <p style="color:red;font-size:26px;" class="text-center" > You are not hosting this event.</p>
+                            <%    
                             } else if (request.getParameter("successfullCreate") != null && request.getParameter("successfullCreate").equals("true")) {
                             %>
                             <p style="color:green;font-size:26px;" class="text-center" > Event successfully created! </p>
@@ -91,10 +95,9 @@
                             <br>
                             <p>Event Name:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="text" name="eventName" id="eventName" class="form-control" maxlength="100" placeholder="Enter Event Name" required>
+                                <input type="text" name="eventName" id="eventName" class="form-control" maxlength="100" <%if(event!=null){out.println("value=\"" + event.getEventName() + "\"");}%> placeholder="Enter Event Name" required>
                                 <label for="eventname"><%if(event!=null){out.println(event.getEventName());}else{%> Event Name <%}%></label>
                             </div>
-
 
                             <p>Date / Time:</p>
                             <div class="form-floating mb-4 p-0">
@@ -104,28 +107,28 @@
 
                             <p>Location:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="text" name="location" id="location" class="form-control" maxlength="100" placeholder="Enter Location" required>
+                                <input type="text" name="location" id="location" class="form-control" maxlength="100" <%if(event!=null){out.println("value=\"" + event.getEventLocation()+ "\"");}%> placeholder="Enter Location" required>
 
                                 <label for="location"><%if(event!=null){out.println(event.getEventLocation());}else{%> Location <%}%></label>
                             </div>
 
                             <p>Short Description:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="text" name="shortDescription" class="form-control" maxlength="100" placeholder="Enter Short Description" required>
+                                <input type="text" name="shortDescription" class="form-control" maxlength="100" <%if(event!=null){out.println("value=\"" + event.getShortDescription()+ "\"");}%> placeholder="Enter Short Description" required>
 
                                 <label for="location"><%if(event!=null){if(event.getShortDescription().length() > 100){out.println(event.getShortDescription().substring(0, 100) + "...");}else{out.println(event.getShortDescription());};}else{%> Short Description <%}%></label>
                             </div>
 
                             <p>Detailed Description:</p>
                             <div class="form-floating mb-4 p-0">
-                                <textarea id="string" name="longDescription" class="form-control" maxlength="500" placeholder="Enter Detailed Description" required style="height: 160px"></textarea>
+                                <textarea id="string" name="longDescription" class="form-control" maxlength="500"  placeholder="Enter Detailed Description" required style="height: 160px"><%if(event!=null){out.println(event.getLongDescription());}%></textarea>
 
-                                <label for="message"><%if(event!=null){if(event.getLongDescription().length() > 100){out.println(event.getLongDescription().substring(0, 100) + "...");}else{out.println(event.getLongDescription());}}else{%> Tell us about your event <%}%></label>
+                                <label for="message"><%if(event!=null){if(event.getLongDescription().length() > 100){out.println(event.getLongDescription().substring(0, 100) + "...");}else{out.println(event.getLongDescription().trim());}}else{%> Tell us about your event <%}%></label>
                             </div>
 
                             <p>Max Participant:</p>
                             <div class="form-floating mb-4 p-0">
-                                <input type="number" name="maxParticipant" id="location" min="1" class="form-control" maxlength="100" placeholder="Enter Max Participant" required>
+                                <input type="number" name="maxParticipant" id="location" min="1" class="form-control" maxlength="100" placeholder="Enter Max Participant" <%if(event!=null){out.println("value=\"" + event.getMaxParticipant()+ "\"");}%> required>
 
                                 <label for="location"><%if(event!=null){out.println(event.getMaxParticipant());}else{%> Max Participant <%}%></label>
                             </div>

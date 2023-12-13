@@ -11,19 +11,22 @@ public class EventImagesDAO {
 
     public static int createEventImage(String eventID, byte[] imageData) throws ParseException {
         //  Prepare query to create new user
-        System.out.println("Inside event image");
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO event_images (eventID, image) VALUES (?, ?)")) {
             preparedStatement.setString(1, eventID);
-            preparedStatement.setBytes(2, imageData);
+            if (imageData == null) {
+                System.out.println("Null image assigned");
+                System.out.println("NULL: " + java.sql.Types.BLOB);
+                preparedStatement.setNull(2, java.sql.Types.BLOB);
+            } else {
+                preparedStatement.setBytes(2, imageData);
+            }
 
-            System.out.println("PrStatemtent:" + preparedStatement);
             // Execute query
             int rowsAffected = preparedStatement.executeUpdate();
 
             // Return rowsAffected to indicate ">0"
             // >0 : Successfull registration
-            System.out.println("Image rows affected: " + rowsAffected);
             return rowsAffected;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +60,11 @@ public class EventImagesDAO {
         // Prepare query to update user information
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE event_images SET image = ? WHERE eventID = ?")) {
-            preparedStatement.setBytes(1, imageData);
+            if (imageData == null) {
+                preparedStatement.setNull(1, java.sql.Types.BLOB);
+            } else {
+                preparedStatement.setBytes(1, imageData);
+            }
             preparedStatement.setString(2, eventID);
 
             // Execute query
@@ -72,7 +79,7 @@ public class EventImagesDAO {
             return 0;
         }
     }
-    
+
     public static int deleteUserEvents(String eventID) {
         // Prepare query to delete a record from user_events
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(

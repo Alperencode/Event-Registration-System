@@ -61,15 +61,19 @@
                         </div>
 
                         <%
-                                if (events.size() == 0) {%>
+                            if (events.size() == 0) {%>
                         <br>
                         <p class="text-center" style="color:gray;font-size: 36px;font-weight: bold">You have no <%out.println(eventType);%> Events...</p>
+                        <%if (eventType.equals("Hosting")) {%>
+                        <br>
+                        <p class="text-center"><a href="${pageContext.request.contextPath}/Event/CreateEvent.jsp" class="custom-link mb-2" style="font-size: 28px">Create one!</a></p>
+                        <%}%>
                         <%} else {
-                                for (int i = 0; i < events.size(); i++) {%>
+                            for (int i = 0; i < events.size(); i++) {%>
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
-                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
-                                    <img src="/Event-Registration-System/ImageServlet?eventID=<%= events.get(i).getEventID() %>" class="img-fluid product-image" alt="">
+                                <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID());%>">
+                                    <img src="/Event-Registration-System/ImageServlet?eventID=<%= events.get(i).getEventID()%>" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex"></div>
@@ -86,7 +90,7 @@
                             </div>
                         </div>
                         <%}
-                                }%>
+                            }%>
                     </div>
                 </div>
             </section>

@@ -17,21 +17,22 @@ public class ImageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String eventID = request.getParameter("eventID");
-
+        
         byte[] imageData = null;
         try {
             imageData = EventImagesDAO.getEventImage(eventID);
         } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
 
-        if (imageData != null) {
+        if (imageData != null && imageData.length > 0) {
             response.setContentType("image/jpeg");
             response.setContentLength(imageData.length);
             OutputStream outStream = response.getOutputStream();
             outStream.write(imageData);
             outStream.close();
-        } else {
+        } else{
             String defaultImagePath = "images/default.jpeg";
             response.sendRedirect(defaultImagePath);
         }
