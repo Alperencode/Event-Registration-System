@@ -52,7 +52,7 @@
                 }
                 
             %>
-            <form action="/Event-Registration-System/CreateEventServlet" method="POST">
+            <form action="/Event-Registration-System/CreateEventServlet" method="POST" enctype="multipart/form-data">
                 <section class="product-detail section-padding">
                     <div class="container">
                         <div class="row">
@@ -65,14 +65,26 @@
                             %>
                             <p style="color:red;font-size:26px;" class="text-center" > Something went wrong, please try again. </p>
                             <%    
-                            } else if (request.getParameter("successfull") != null && request.getParameter("successfull").equals("true")) {
+                            } else if (request.getParameter("imageError") != null && request.getParameter("imageError").equals("true")) {
+                            %>
+                            <p style="color:red;font-size:26px;" class="text-center" > Something went wrong while uploading the image, please try again. </p>
+                            <%    
+                            } else if (request.getParameter("lessMaxParticipant") != null && request.getParameter("lessMaxParticipant").equals("true")) {
+                            %>
+                            <p style="color:red;font-size:26px;" class="text-center" > You can't enter less "Max Participant" value than the old one. </p>
+                            <%    
+                            } else if (request.getParameter("successfullUpdate") != null && request.getParameter("successfullUpdate").equals("true")) {
+                            %>
+                            <p style="color:green;font-size:26px;" class="text-center" > Event successfully updated! </p>
+                            <%    
+                            } else if (request.getParameter("successfullCreate") != null && request.getParameter("successfullCreate").equals("true")) {
                             %>
                             <p style="color:green;font-size:26px;" class="text-center" > Event successfully created! </p>
                             <%}%>
                             <div class="event-container">
                                 <div class="upload-area" onclick="openFileExplorer()">
                                     <input type="file" name="image" id="fileInput" accept="image/*" style="display: none" onchange="loadImage()">
-                                    <img id="uploadedImage">
+                                    <img id="uploadedImage" <%if(event!=null){out.println("src=\"/Event-Registration-System/ImageServlet?eventID=" + event.getEventID() + "\"");}%>>
                                     <p id="uploadText">Click to upload</p>
                                 </div>
                             </div> 

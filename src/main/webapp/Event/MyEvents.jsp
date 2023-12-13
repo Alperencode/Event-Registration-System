@@ -69,7 +69,7 @@
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="${pageContext.request.contextPath}/Event/EventPage.jsp?eventID=<%out.println(events.get(i).getEventID()); %>">
-                                    <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="/Event-Registration-System/ImageServlet?eventID=<%= events.get(i).getEventID() %>" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex"></div>

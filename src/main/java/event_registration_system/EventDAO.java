@@ -90,7 +90,6 @@ public class EventDAO {
         try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE events SET eventName = ?, eventDate = ?, eventTime = ?, eventLocation = ?, maxParticipant = ?, shortDescription = ?, longDescription = ? WHERE eventID = ?")) {
 
-            System.out.println("Setting parameters");
             preparedStatement.setString(1, event.getEventName());
             preparedStatement.setString(2, event.getEventDate());
             preparedStatement.setString(3, event.getEventTime());
@@ -170,7 +169,7 @@ public class EventDAO {
                     );
                     return event;
                 } else {
-                    return null; // Return null to indicate no user found
+                    return null; // Return null to indicate no event found
                 }
             }
         } catch (SQLException e) {

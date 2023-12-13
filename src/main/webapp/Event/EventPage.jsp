@@ -70,7 +70,7 @@
                         <%}%>
                         <div class="col-lg-6 col-12">
                             <div class="product-thumb">
-                                <img src="${pageContext.request.contextPath}/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                <img src="/Event-Registration-System/ImageServlet?eventID=<%= event.getEventID()%>" class="img-fluid product-image" alt="">
                             </div>
                         </div>
 
@@ -158,8 +158,8 @@
                                     <input type="hidden" name="eventType" value="Joined">
                                     <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                                         <button type="submit" class="btn custom-btn cart-btn" data-bs-toggle="modal" data-bs-target="#cart-modal" <%if (EventDAO.getParticipant(event.getEventID()) >= event.getMaxParticipant()) {
-                                                out.println("disabled");
-                                            }%>>JOIN</button>
+                                                out.println("disabled>" + "Event is Full");
+                                            } else {%>>Join<%}%></button>
                                     </div>
                                     <br>
                                 </form>
@@ -199,12 +199,14 @@
                                 </div>
                                 <%}%>
                             </div>
-                            <div class="product-description">
 
-                                <strong class="d-block mt-4 mb-2">Description:</strong>
+                        </div>
+                            
+                        <div class="product-description" style="">
+<br>
+                            <strong class="d-block mt-4 mb-2">Description:</strong>
 
-                                <p class="lead mb-5"><% out.println(event.getLongDescription()); %></p>
-                            </div>
+                            <p class="lead mb-5"><% out.println(event.getLongDescription()); %></p>
                         </div>
                     </div>
                 </div>

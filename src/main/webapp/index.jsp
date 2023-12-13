@@ -158,9 +158,7 @@
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3">Check <span>Events</span><br>you<span> Host</span></h4>
 
-                                                <p>Little Fashion templates comes with <a href="sign-in.html">sign in</a> / <a href="sign-up.html">sign up</a> pages, product listing / product detail, about, FAQs, and contact page.</p>
-
-                                                <p>Since this HTML template is based on Boostrap 5 CSS library, you can feel free to add more components as you need.</p>
+                                                <p>Hosted Events Panel is a powerful section of the Check Events platform and allows you to manage your events more effectively.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
                                                     <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Hosting" class="custom-link mb-2">
@@ -184,9 +182,9 @@
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3"><span></span><br>All events you<span><br> Joined</span></h4>
 
-                                                <p>Over three years in business, We’ve had the chance to work on a variety of projects, with companies</p>
+                                                <p>Joined Events is your personal event space on this platform and allows you to easily keep track of the events you attend.</p>
 
-                                                <p>Custom work is branding, web design, UI/UX design</p>
+                                                <p>You can see features such as viewing the events you have participated in, quick access to event details, participation status and statistics.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
                                                     <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Joined" class="custom-link mb-2">
@@ -209,7 +207,7 @@
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3"><span></span><br>All events you<span><br> Saved</span></h4>
 
-                                                <p>Over three years in business, We’ve had the chance on projects</p>
+                                                <p>The Saved Events page is an area specially designed for you. Thanks to this panel, you can easily manage and follow the events you have recorded or found interesting.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
                                                     <a href="${pageContext.request.contextPath}/Event/MyEvents.jsp?eventType=Saved" class="custom-link mb-2">
@@ -233,9 +231,9 @@
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3"><span></span><br>Do you want to<span><span><br>Created</span> an event</h4>
 
-                                                <p>Over three years in business, We’ve had the chance to work on a variety of projects, with companies</p>
+                                                <p>The Create Event panel is a powerful tool that allows you to easily manage your events.</p>
 
-                                                <p>Custom work is branding, web design, UI/UX design</p>
+                                                <p>It provides you with features such as custom event page creation, participant registration and management, and customizable event details.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
                                                     <a href="${pageContext.request.contextPath}/Event/CreateEvent.jsp" class="custom-link mb-2">

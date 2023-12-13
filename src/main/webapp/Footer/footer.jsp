@@ -10,7 +10,7 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Event Registration</a> System</h4>
+                        <h4 class="text-white mb-3"><a href="${pageContext.request.contextPath}/index.jsp">Event Registration System </a> </h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2023 <strong>ERS</strong></p>
                         <br>
                     </div>

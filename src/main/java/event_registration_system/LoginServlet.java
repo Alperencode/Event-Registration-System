@@ -1,6 +1,5 @@
 package event_registration_system;
 
-// LoginServlet.java
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
