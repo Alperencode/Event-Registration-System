@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2023 at 02:46 PM
+-- Generation Time: Dec 13, 2023 at 08:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -42,13 +42,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `userID`, `username`, `email`, `password`, `creationDate`) VALUES
 (1, 'f24a59b6fb42b379', 'adminNew', 'admin@gmail.com', 'a665a45920422f9d417e4867efdc4fb8', '2023-12-03 15:53:55'),
-(2, '68d3d32bdde3f5fc', 'Alperen123', 'alperen@gmail.com', '03ac674216f3e15c761ee1a5e255f067', '2023-12-03 15:54:23'),
+(2, '68d3d32bdde3f5fc', 'Alperen', 'alperen@gmail.com', '03ac674216f3e15c761ee1a5e255f067', '2023-12-03 15:54:23'),
 (3, '9e3bf42e08c5eb71', 'simal', 'simal@gmail.com', 'c775e7b757ede630cd0aa1113bd10266', '2023-12-04 05:27:24'),
 (7, 'd88c20327a04e882', 'danyal', 'danyalbabur@gmail.com', '5994471abb01112afcc18159f6cc74b4', '2023-12-08 16:33:50'),
-(9, '08f884f253d3354f', 'deneme', 'x@gmail.com', 'a665a45920422f9d417e4867efdc4fb8', '2023-12-10 18:35:07'),
-(10, '683430a3b9f69bfc', 'yenideneme', 'yenideneme@gmail.com', '03ac674216f3e15c761ee1a5e255f067', '2023-12-10 22:46:38'),
 (11, 'a547696fa04565a9', 'root', 'root@gmail.com', '96cae35ce8a9b0244178bf28e4966c2c', '2023-12-11 00:25:39'),
-(18, '49a68dd1c7082628', 'simoi', 'simal.arifoglu@gmail.com', 'a665a45920422f9d417e4867efdc4fb8', '2023-12-11 21:00:00');
+(18, '49a68dd1c7082628', 'simoi', 'simal.arifoglu@gmail.com', 'a665a45920422f9d417e4867efdc4fb8', '2023-12-11 21:00:00'),
+(19, 'ebbf9e8e298d7fc7', 'zeynep', 'zeynepsude@gmail.com', 'a665a45920422f9d417e4867efdc4fb8', '2023-12-13 14:24:41');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

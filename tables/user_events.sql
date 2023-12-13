@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2023 at 02:46 PM
+-- Generation Time: Dec 13, 2023 at 08:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -41,9 +41,6 @@ CREATE TABLE `user_events` (
 --
 
 INSERT INTO `user_events` (`id`, `userEventID`, `userID`, `eventID`, `eventType`, `date`) VALUES
-(1, '880532442dc7f3fa', '68d3d32bdde3f5fc', 'cc788d49997d2d37', 'Hosting', '2023-12-05 11:52:33'),
-(2, '666d5b6b26c2eb73', '68d3d32bdde3f5fc', '2046e31c125e398e', 'Hosting', '2023-12-06 17:45:05'),
-(22, '406082a44ee68cb8', 'f24a59b6fb42b379', 'cc788d49997d2d37', 'Joined', '2023-12-11 23:32:00'),
 (46, '201a90abbd364794', '49a68dd1c7082628', 'da399f6d5fe90470', 'Hosting', '2023-12-12 21:18:24'),
 (47, '52d0e6e2dd66070a', '49a68dd1c7082628', '986d31b861695126', 'Hosting', '2023-12-12 21:21:14'),
 (48, 'dae4a2e331ceffbc', '49a68dd1c7082628', '4208270b28b08c6b', 'Hosting', '2023-12-12 21:22:33'),
@@ -56,7 +53,16 @@ INSERT INTO `user_events` (`id`, `userEventID`, `userID`, `eventID`, `eventType`
 (56, '0f222dfe46855507', 'f24a59b6fb42b379', 'bab94532e681020a', 'Hosting', '2023-12-12 22:24:31'),
 (57, 'd7b6c6e3a58e38e2', 'f24a59b6fb42b379', '252febb9d563b9b2', 'Hosting', '2023-12-12 22:25:32'),
 (58, '889aaeceaa49c0c0', 'f24a59b6fb42b379', '617843b033af166c', 'Hosting', '2023-12-12 22:28:33'),
-(59, '427b47683eac5728', 'f24a59b6fb42b379', '755a16d98e9d42d4', 'Hosting', '2023-12-12 21:00:00');
+(59, '427b47683eac5728', 'f24a59b6fb42b379', '755a16d98e9d42d4', 'Hosting', '2023-12-12 21:00:00'),
+(62, '0f2c39e24df44ffb', 'ebbf9e8e298d7fc7', '986d31b861695126', 'Joined', '2023-12-13 14:25:38'),
+(75, '8c892b19a238adb8', '68d3d32bdde3f5fc', '252febb9d563b9b2', 'Saved', '2023-12-13 16:45:44'),
+(76, 'f09439939359a01f', '68d3d32bdde3f5fc', 'da399f6d5fe90470', 'Joined', '2023-12-13 16:46:01'),
+(77, '689b207b4376d195', '68d3d32bdde3f5fc', '4208270b28b08c6b', 'Joined', '2023-12-13 16:46:10'),
+(78, '40ce3fb347aad7fc', '68d3d32bdde3f5fc', '4208270b28b08c6b', 'Saved', '2023-12-13 16:46:13'),
+(79, 'fb45d9eb093fe2d9', 'd88c20327a04e882', 'd3dbbafa0b4cc5de', 'Joined', '2023-12-13 16:50:25'),
+(80, '8ebc6adf88e72c57', 'ebbf9e8e298d7fc7', 'd3dbbafa0b4cc5de', 'Joined', '2023-12-13 16:51:33'),
+(87, 'e5e065c676c5f741', '68d3d32bdde3f5fc', '55c72fe13edb0f6a', 'Joined', '2023-12-13 19:14:20'),
+(88, '69b924d47aa84f43', '49a68dd1c7082628', '3b352afffa113a05', 'Joined', '2023-12-13 19:37:54');
 
 --
 -- Indexes for dumped tables
@@ -78,7 +84,7 @@ ALTER TABLE `user_events`
 -- AUTO_INCREMENT for table `user_events`
 --
 ALTER TABLE `user_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Constraints for dumped tables
