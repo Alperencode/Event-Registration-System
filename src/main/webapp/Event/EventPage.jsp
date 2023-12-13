@@ -99,7 +99,7 @@
 
                                 <strong class="d-block mt-4 mb-2">Time:</strong>
 
-                                <p class="lead mb-5"><% out.println(event.getEventTime()); %></p>
+                                <p class="lead mb-5"><% out.println(event.getEventTime().substring(0,5)); %></p>
                             </div>
 
                             <div class="product-description">
