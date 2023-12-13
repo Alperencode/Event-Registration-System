@@ -12,6 +12,7 @@
         <%
             if (user == null) {
                 response.sendRedirect("../Login/login.jsp");
+                return;
             }
 
             String username = request.getParameter("username");

@@ -2,7 +2,7 @@ package event_registration_system;
 
 public class User {
 
-    private String userID, username, email, password, creationDate;
+    private String userID, username, email, password;
 
     public User(String userID, String username, String email, String password) {
         this.userID = userID;
@@ -46,11 +46,4 @@ public class User {
         this.password = password;
     }
 
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
 }

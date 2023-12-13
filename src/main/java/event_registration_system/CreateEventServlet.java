@@ -87,7 +87,6 @@ public class CreateEventServlet extends HttpServlet {
                     if (image != null && imageData.length > 0) {
                         EventImagesDAO.updateImage(eventID, imageData);
                     }
-                    
                     break;
                 case "Create":
                     returnValue = EventDAO.createEvent(event);

@@ -104,7 +104,6 @@
 
         </main>
 
-        <script src="js/import_image.js"></script>
         <%@include file="../Footer/footer.jsp" %>
 
     </body>

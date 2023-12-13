@@ -136,7 +136,6 @@
                             <div class="product-cart-thumb row">
                                 <%
                                     if (eventID != null) {
-                                        eventID = eventID;
                                         if (UserEventsDAO.isUser(user.getUserID(), eventID, "Hosting")) {%>
                                 <input type="hidden" name="operation" value="Update">
                                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">

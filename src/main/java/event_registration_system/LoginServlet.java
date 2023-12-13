@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             // Create a cookie and add user ID to it
             if (rememberMe != null && rememberMe.equals("true")) {
                 Cookie userIDCookie = new Cookie("userID", userID);
-                userIDCookie.setMaxAge(60*60*24); 
+                userIDCookie.setMaxAge(60*60*24);
                 response.addCookie(userIDCookie);
             }
 

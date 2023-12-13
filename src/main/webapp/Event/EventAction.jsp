@@ -23,7 +23,7 @@
                         result = UserEventsDAO.deleteUserEventsByType(userID, eventType);
                         if (result > 0) {
                             response.sendRedirect("EventPage.jsp?eventID=" + eventID + "&Leaved=true");
-                        }
+                         }
                         break;
                     case "UnSave":
                         result = UserEventsDAO.deleteUserEventsByType(userID, eventType);
